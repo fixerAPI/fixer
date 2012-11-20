@@ -9,3 +9,7 @@ end
 get '/latest' do
   jsonp Snapshot.last
 end
+
+get '/historical/:date' do
+  jsonp Snapshot.new params[:date]
+end

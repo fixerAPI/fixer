@@ -35,6 +35,9 @@
         max-width: 680px;
         padding: 20px;
       }
+      header {
+        padding-bottom: 30px;
+      }
       header h1 {
         font: bold 36px/1.25 'Open Sans', sans-serif;
       }
@@ -79,6 +82,18 @@
           curl http://fixer.io/latest
         </code>
       </section>
+
+      <section class="doc">
+        <p>
+        Get a historical snapshot.
+        </p>
+      </section>
+      <section class="sample">
+        <code>
+          curl http://localhost:9292/historical/2000-01-03
+        </code>
+      </section>
+
     </div>
   </body>
 </html>
