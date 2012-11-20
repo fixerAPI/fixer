@@ -1,0 +1,38 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    fixer (0.5.0)
+      nokogiri (~> 1.5)
+    kgio (2.7.4)
+    multi_json (1.3.7)
+    nokogiri (1.5.5)
+    pg (0.14.1)
+    rack (1.4.1)
+    rack-protection (1.2.0)
+      rack
+    raindrops (0.10.0)
+    sequel (3.41.0)
+    sinatra (1.3.3)
+      rack (~> 1.3, >= 1.3.6)
+      rack-protection (~> 1.2)
+      tilt (~> 1.3, >= 1.3.3)
+    sinatra-jsonp (0.4)
+      multi_json (~> 1.3.7)
+      sinatra (~> 1.0)
+    tilt (1.3.3)
+    unicorn (4.4.0)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
+    yajl-ruby (1.1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  fixer
+  pg
+  sequel
+  sinatra-jsonp
+  unicorn
+  yajl-ruby
