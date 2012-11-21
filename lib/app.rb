@@ -7,7 +7,7 @@ set :root, File.expand_path('..', File.dirname(__FILE__))
 
 helpers do
   def base
-    params[:base] || 'EUR'
+    params[:base] || Snapshot::DEFAULT_BASE
   end
 end
 
@@ -22,9 +22,9 @@ get '/latest' do
     .to_hash
 end
 
-get '/:date' do |date|
+get '/:date' do
   jsonp Snapshot
-    .new(date)
+    .new(params[:date])
     .with_base(base)
     .to_hash
 end
