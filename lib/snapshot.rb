@@ -10,10 +10,12 @@ class Snapshot
     @date = date
   end
 
-  def to_json
-    Yajl::Encoder.new.encode base: 'EUR',
-                             date:  @date,
-                             rates: rates
+  def to_base(base)
+    {
+      base:  base,
+      date:  @date,
+      rates: rates
+    }
   end
 
   private

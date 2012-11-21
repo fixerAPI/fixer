@@ -14,7 +14,6 @@ describe 'the application' do
   end
 
   it 'sets base currency' do
-    skip 'pending'
     get '/latest?base=USD'
     json['base'].must_equal 'USD'
   end
