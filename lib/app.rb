@@ -1,6 +1,7 @@
 require_relative 'snapshot'
 require 'sinatra'
 require 'sinatra/jsonp'
+require 'yajl'
 
 helpers do
   def base
@@ -15,11 +16,13 @@ end
 get '/latest' do
   jsonp Snapshot
     .last
-    .to_base base
+    .with_base(base)
+    .to_hash
 end
 
 get '/:date' do |date|
   jsonp Snapshot
     .new(date)
-    .to_base base
+    .with_base(base)
+    .to_hash
 end

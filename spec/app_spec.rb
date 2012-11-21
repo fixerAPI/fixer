@@ -1,6 +1,7 @@
 require_relative 'helper'
 require 'rack/test'
 require 'app'
+require 'yajl'
 
 describe 'the application' do
   include Rack::Test::Methods

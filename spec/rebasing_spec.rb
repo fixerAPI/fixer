@@ -2,28 +2,30 @@ require_relative 'helper'
 require 'snapshot'
 
 describe 'when rebased to a new base' do
-  let(:base)     { 'USD' }
+  let(:new_base) { 'USD' }
   let(:snapshot) { Snapshot.new 'a date' }
-  let(:rates)    { { 'USD' => 1.2781 } }
-  let(:rebased) do
+  let(:rates)    { { new_base => 1.2781 } }
+  let(:rebased_hash) do
     snapshot.stub :rates, rates do
-      snapshot.to_base base
+      snapshot
+        .with_base(new_base)
+        .to_hash
     end
   end
 
   it 'resets base' do
-    rebased[:base].must_equal base
+    rebased_hash[:base].must_equal new_base
   end
 
   it 'adds former base to rates' do
-    rebased[:rates].keys.must_include 'EUR'
+    rebased_hash[:rates].keys.must_include Snapshot::DEFAULT_BASE
   end
 
   it 'removes new base from rates' do
-    rebased[:rates].keys.wont_include base
+    rebased_hash[:rates].keys.wont_include new_base
   end
 
   it 'rebases rates' do
-    rebased[:rates]['EUR'].must_equal 0.7824
+    rebased_hash[:rates][Snapshot::DEFAULT_BASE].must_equal 0.7824
   end
 end
