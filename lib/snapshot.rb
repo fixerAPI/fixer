@@ -9,6 +9,7 @@ class Snapshot
     @date = date
   end
 
+  # Ugly as fuck.
   def to_base(base)
     rebased_rates = rates
 
