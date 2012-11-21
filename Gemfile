@@ -8,6 +8,7 @@ gem 'unicorn'
 gem 'yajl-ruby', require: 'yajl'
 
 group :development do
+  gem 'minitest'
   gem 'rack-test'
   gem 'shotgun'
 end

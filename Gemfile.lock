@@ -4,6 +4,7 @@ GEM
     fixer (0.5.0)
       nokogiri (~> 1.5)
     kgio (2.7.4)
+    minitest (4.3.0)
     multi_json (1.3.7)
     nokogiri (1.5.5)
     pg (0.14.1)
@@ -35,6 +36,7 @@ PLATFORMS
 
 DEPENDENCIES
   fixer
+  minitest
   pg
   rack-test
   sequel
