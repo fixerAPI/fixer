@@ -6,3 +6,7 @@ gem 'sequel'
 gem 'sinatra-jsonp'
 gem 'unicorn'
 gem 'yajl-ruby', require: 'yajl'
+
+group :test do
+  gem 'rack-test'
+end
