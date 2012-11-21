@@ -7,6 +7,7 @@ gem 'sinatra-jsonp'
 gem 'unicorn'
 gem 'yajl-ruby', require: 'yajl'
 
-group :test do
+group :development do
   gem 'rack-test'
+  gem 'shotgun'
 end
