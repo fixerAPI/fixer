@@ -23,4 +23,15 @@ describe 'the application' do
     get '/latest?symbols=USD'
     json['rates'].keys.must_equal %w(USD)
   end
+
+  it 'returns historical data' do
+    get '/2012-11-20'
+    json['rates'].wont_be :empty?
+  end
+
+  it 'works around holidays' do
+    skip 'an "oh, wow" feature'
+    get '/2010-01-01'
+    json['rates'].wont_be :empty?
+  end
 end
