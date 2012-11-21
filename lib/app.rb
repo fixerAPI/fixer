@@ -3,6 +3,8 @@ require 'sinatra'
 require 'sinatra/jsonp'
 require 'yajl'
 
+set :root, File.expand_path('..', File.dirname(__FILE__))
+
 helpers do
   def base
     params[:base] || 'EUR'
