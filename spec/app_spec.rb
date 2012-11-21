@@ -10,7 +10,7 @@ describe 'the application' do
 
   it 'returns latest snapshot' do
     get '/latest'
-    assert last_response.ok?
+    last_response.must_be :ok?
   end
 
   it 'sets base currency' do
