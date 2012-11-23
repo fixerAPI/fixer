@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="description" content="Fixer is a JSON and JSONP API for foreign exchange rates.">
+    <meta name="description" content="Fixer is a JSON API for foreign exchange rates.">
     <title>Fixer</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <script type="text/javascript">
@@ -61,12 +61,20 @@
         color: #006ce1;
         content: '$ ';
       }
+      footer {
+        color: #555;
+        font-size: 11px;
+        padding: 3em 0;
+      }
+      footer a {
+        color: #333;
+      }
     </style>
   </head>
   <body>
     <div id="wrapper">
       <header>
-        <h1>Fixer: A JSON and JSONP API for exchange rates</h1>
+        <h1>Fixer: A JSON API for exchange rates</h1>
       </header>
 
       <p>
@@ -78,18 +86,43 @@
       </code>
 
       <p>
-        Quote against another currency.
+        Get historical rates for any day since 1999.
+      </p>
+      <code>
+        curl http://fixer.io/2000-01-03
+      </code>
+
+      <p>
+        Quote against another currency, both real-time and historically, by
+        setting the <strong>base</strong> parameter in your request.
       </p>
       <code>
         curl http://fixer.io/latest?base=USD
       </code>
 
       <p>
-        Get a historical snapshot.
-      </p>
+         Request specific exchange rates, both real-time and historically, by
+         setting the <strong>symbols</strong> or <strong>currencies</strong>
+         parameter in your request.
+       </p>
       <code>
-        curl http://fixer.io/2000-01-03
+        curl http://fixer.io/latest?symbols=USD,GBP
       </code>
+
+       <p>
+         Make cross-domain JSONP requests.
+       </p>
+       <code>
+         curl http://fixer.io/latest?callback=myCallback
+       </code>
+
+       <p>
+         Exchange rates are usually updated by 3pm CET.
+       </p>
+
+       <footer>
+         By using this API, you agree to <a href="http://sam.zoy.org/wtfpl/COPYING">WTFPL</a>.
+       </footer>
 
     </div>
   </body>
