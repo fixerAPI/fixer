@@ -6,8 +6,10 @@ require 'yajl'
 set :root, File.expand_path('..', File.dirname(__FILE__))
 
 helpers do
-  def base
-    params[:base] || Snapshot::DEFAULT_BASE
+  def snapshot
+    Snapshot
+      .new(params)
+      .quote
   end
 end
 
@@ -16,15 +18,13 @@ get '/' do
 end
 
 get '/latest' do
-  jsonp Snapshot
-    .last
-    .with_base(base)
-    .to_hash
+  jsonp snapshot
 end
 
 get '/:date' do
-  jsonp Snapshot
-    .new(params[:date])
-    .with_base(base)
-    .to_hash
+  jsonp snapshot
+end
+
+error do
+  "Something is rotten in the state of Denmark."
 end

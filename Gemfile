@@ -5,7 +5,8 @@ gem 'pg'
 gem 'sequel'
 gem 'sinatra-jsonp'
 gem 'unicorn'
-gem 'yajl-ruby', require: 'yajl'
+gem 'virtus'
+gem 'yajl-ruby'
 
 group :development do
   gem 'minitest'

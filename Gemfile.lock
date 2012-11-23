@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    backports (2.6.5)
     fixer (0.5.0)
       nokogiri (~> 1.5)
     kgio (2.7.4)
@@ -29,6 +30,8 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    virtus (0.5.2)
+      backports (~> 2.6.1)
     yajl-ruby (1.1.0)
 
 PLATFORMS
@@ -43,4 +46,5 @@ DEPENDENCIES
   shotgun
   sinatra-jsonp
   unicorn
+  virtus
   yajl-ruby

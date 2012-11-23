@@ -7,6 +7,7 @@ describe 'the application' do
 
   let(:app)  { Sinatra::Application }
   let(:json) { Yajl::Parser.new.parse last_response.body }
+  let(:status) { last_response.status }
 
   it 'returns latest snapshot' do
     get '/latest'

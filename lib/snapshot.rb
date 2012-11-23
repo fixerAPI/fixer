@@ -1,59 +1,49 @@
 require_relative 'db'
+require 'virtus'
 
 class Snapshot
-  DEFAULT_BASE = 'EUR'
+  include Virtus
 
-  def self.last
-    new Currency.last_date
-  end
+  attribute :base,  String, default: 'EUR'
+  attribute :date,  Date,   default: proc { Currency.last_date }
 
-  def initialize(date)
-    @date = date
-    @base = DEFAULT_BASE
-  end
-
-  # Ugly as fuck.
-  def to_hash
-    rebased_rates = rates
-
-    unless @base == DEFAULT_BASE
-      base_rate = rebased_rates
-        .update('EUR' => 1.0)
-        .delete @base
-
-      rebased_rates.each do |iso_code, rate|
-        new_rate = rate / base_rate
-        rebased_rates[iso_code] =
-          case new_rate
-          when new_rate > 100
-            new_rate.round 2
-          when new_rate > 10
-            new_rate.round 3
-          else
-            new_rate.round 4
-          end
-      end
-    end
-
-    {
-      base:  @base,
-      date:  @date,
-      rates: rebased_rates
-    }
-  end
-
-  def with_base(base)
-    @base = base
-    self
+  def quote
+    attributes.merge rates: rebase(rates)
   end
 
   private
 
   def rates
     Currency
-      .where(date: @date)
-      .reduce({}) { |hsh, currency|
-        hsh.update currency.to_hash
-      }
+      .where(date: date)
+      .reduce({}) do |rates, currency|
+        rates.update currency.to_hash
+      end
+  end
+
+  # Ugly as fuck.
+  def rebase(rates)
+    if base.upcase! != 'EUR'
+      denominator = rates
+        .update('EUR' => 1.0)
+        .delete base
+
+      rates.each do |iso_code, rate|
+        rates[iso_code] = round(rate / denominator)
+      end
+    end
+
+    rates
+  end
+
+  def round(rate)
+    case rate
+    when rate > 100
+      rate.round 2
+    when rate > 10
+      rate.round 3
+    else
+      rate.round 4
+    end
   end
 end
