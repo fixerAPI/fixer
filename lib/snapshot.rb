@@ -37,10 +37,9 @@ class Snapshot
   end
 
   def round(rate)
-    case rate
-    when rate > 100
+    if rate > 100
       rate.round 2
-    when rate > 10
+    elsif rate > 10
       rate.round 3
     else
       rate.round 4
