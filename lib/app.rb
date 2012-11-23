@@ -6,10 +6,20 @@ require 'yajl'
 set :root, File.expand_path('..', File.dirname(__FILE__))
 
 helpers do
+  # Ugly as fuck.
   def snapshot
-    Snapshot
+    symbols = params.delete('symbols') || params.delete('currencies')
+
+    quote = Snapshot
       .new(params)
       .quote
+
+    if symbols
+      symbols = symbols.split ','
+      quote[:rates].keep_if { |k, v| symbols.include? k }
+    end
+
+    quote
   end
 end
 

@@ -20,7 +20,6 @@ describe 'the application' do
   end
 
   it 'filters symbols' do
-    skip 'enterprise feature'
     get '/latest?symbols=USD'
     json['rates'].keys.must_equal %w(USD)
   end
