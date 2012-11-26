@@ -82,42 +82,48 @@
         euro.
       </p>
       <code>
-        curl http://fixer.io/latest
+        curl http://api.fixer.io/latest
       </code>
 
       <p>
         Get historical rates for any day since 1999.
       </p>
       <code>
-        curl http://fixer.io/2000-01-03
+        curl http://api.fixer.io/2000-01-03
       </code>
 
       <p>
-        Quote against a currency, both real-time and historically, by setting
-        the <strong>base</strong> parameter in your request.
+        Quote against a currency by setting the <strong>base</strong> parameter
+        in your request.
       </p>
       <code>
-        curl http://fixer.io/latest?base=USD
+        curl http://api.fixer.io/latest?base=USD
       </code>
 
       <p>
-         Request specific exchange rates, both real-time and historically, by
-         setting the <strong>symbols</strong> or <strong>currencies</strong>
-         parameter.
+         Request specific exchange rates by setting the
+         <strong>symbols</strong> or <strong>currencies</strong> parameter.
        </p>
       <code>
-        curl http://fixer.io/latest?symbols=USD,GBP
+        curl http://api.fixer.io/latest?symbols=USD,GBP
       </code>
 
        <p>
-         Make cross-domain JSONP requests.
+         Make cross-domain <strong>JSONP</strong> requests.
        </p>
        <code>
-         curl http://fixer.io/latest?callback=myCallback
+         curl http://api.fixer.io/latest?callback=myCallback
        </code>
 
        <p>
-         Exchange rates are usually updated by 3pm CET.
+         <strong>HTTPS</strong> endpoints are available.
+       </p>
+       <code>
+         curl https://api.fixer.io/latest
+       </code>
+
+       <p>
+         Exchange rates are usually updated by <strong>3pm CET</strong>.
        </p>
 
        <footer>
