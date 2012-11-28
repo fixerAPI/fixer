@@ -5,9 +5,20 @@ class Snapshot
   include Virtus
 
   attribute :base,  String, default: 'EUR'
-  attribute :date,  Date,   default: proc { Currency.last_date }
+  attribute :date,  Date
 
   def quote
+    self.date =
+      if date
+        Currency
+          .where("date <= '#{date}'")
+          .order(:date)
+          .last
+          .date
+      else
+        Currency.last_date
+      end
+
     attributes.merge rates: rebase(rates)
   end
 

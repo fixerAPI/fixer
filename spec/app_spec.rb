@@ -30,7 +30,6 @@ describe 'the application' do
   end
 
   it 'works around holidays' do
-    skip 'an "oh, wow" feature'
     get '/2010-01-01'
     json['rates'].wont_be :empty?
   end

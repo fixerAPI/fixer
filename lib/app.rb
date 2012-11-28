@@ -7,25 +7,23 @@ set :root, File.expand_path('..', File.dirname(__FILE__))
 
 helpers do
   def redirect_to_api
-    if request.host =~ /^f/
-      redirect request.url.sub %r(://f), '://api.f'
+    if request.url.include? 'https://f'
+      redirect request.url.sub %r{//}, '//api.'
     end
   end
 
   # Ugly as fuck.
   def snapshot
-    symbols = params.delete('symbols') || params.delete('currencies')
-
-    quote = Snapshot
+    quotes = Snapshot
       .new(params)
       .quote
 
-    if symbols
+    if symbols = params.delete('symbols') || params.delete('currencies')
       symbols = symbols.split ','
-      quote[:rates].keep_if { |k, v| symbols.include? k }
+      quotes[:rates].keep_if { |k, _| symbols.include? k }
     end
 
-    quote
+    quotes
   end
 end
 
