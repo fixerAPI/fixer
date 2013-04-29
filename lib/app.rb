@@ -28,7 +28,7 @@ helpers do
 end
 
 get '/' do
-  File.read File.join 'public', 'index.html'
+  redirect 'http://fixer.io'
 end
 
 get '/latest' do
