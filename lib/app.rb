@@ -1,20 +1,17 @@
-require_relative 'snapshot'
 require 'sinatra'
 require 'sinatra/jsonp'
 require 'yajl'
+require 'snapshot'
 
 set :root, File.expand_path('..', File.dirname(__FILE__))
 
 helpers do
-  # Ugly as fuck.
   def snapshot
-    quotes = Snapshot
-      .new(params)
-      .quote
+    quotes = Snapshot.new(params).quote
 
     if symbols = params.delete('symbols') || params.delete('currencies')
-      symbols = symbols.split ','
-      quotes[:rates].keep_if { |k, _| symbols.include? k }
+      symbols = symbols.split(',')
+      quotes[:rates].keep_if { |k, _| symbols.include?(k) }
     end
 
     quotes

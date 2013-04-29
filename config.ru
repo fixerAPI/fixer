@@ -1,3 +1,3 @@
-require './lib/app'
-
+$: << 'lib'
+require 'app'
 run Sinatra::Application
