@@ -5,17 +5,6 @@
     <meta name="description" content="Fixer is a JSON API for foreign exchange rates.">
     <title>Fixer</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-36475354-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
     <style type="text/css">
       * {
         margin: 0;
@@ -47,9 +36,7 @@
         padding-bottom: 1em;
       }
       code {
-                border-radius: 5px;
-           -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
+        border-radius: 5px;
         background: #fff;
         border: 1px solid #ccc;
         display: block;
@@ -77,58 +64,85 @@
         <h1>Fixer: A JSON API for exchange rates</h1>
       </header>
 
-      <p>
-        Get the latest foreign exchange reference rates, quoted against the
-        euro.
-      </p>
-      <code>
-        curl http://api.fixer.io/latest
-      </code>
+      <section>
+        <p>
+          Get the latest foreign exchange reference rates, quoted against the
+          euro.
+        </p>
+        <code>
+          curl http://api.fixer.io/latest
+        </code>
 
-      <p>
-        Get historical rates for any day since 1999.
-      </p>
-      <code>
-        curl http://api.fixer.io/2000-01-03
-      </code>
+        <p>
+          Get historical rates for any day since 1999.
+        </p>
+        <code>
+          curl http://api.fixer.io/2000-01-03
+        </code>
 
-      <p>
-        Quote against a currency by setting the <strong>base</strong> parameter
-        in your request.
-      </p>
-      <code>
-        curl http://api.fixer.io/latest?base=USD
-      </code>
+        <p>
+          Quote against a currency by setting the <strong>base</strong> parameter
+          in your request.
+        </p>
+        <code>
+          curl http://api.fixer.io/latest?base=USD
+        </code>
 
-      <p>
-         Request specific exchange rates by setting the
-         <strong>symbols</strong> or <strong>currencies</strong> parameter.
-       </p>
-      <code>
-        curl http://api.fixer.io/latest?symbols=USD,GBP
-      </code>
+        <p>
+          Request specific exchange rates by setting the
+          <strong>symbols</strong> or <strong>currencies</strong> parameter.
+        </p>
+        <code>
+          curl http://api.fixer.io/latest?symbols=USD,GBP
+        </code>
 
-       <p>
-         Make cross-domain <strong>JSONP</strong> requests.
-       </p>
-       <code>
-         curl http://api.fixer.io/latest?callback=myCallback
-       </code>
+        <p>
+          Make cross-domain <strong>JSONP</strong> requests.
+        </p>
+        <code>
+          curl http://api.fixer.io/latest?callback=myCallback
+        </code>
 
-       <p>
-         <strong>HTTPS</strong> endpoints are available.
-       </p>
-       <code>
-         curl https://api.fixer.io/latest
-       </code>
+        <p>
+          <strong>HTTPS</strong> endpoints are available.
+        </p>
+        <code>
+          curl https://api.fixer.io/latest
+        </code>
 
-       <p>
-         Exchange rates are usually updated by <strong>3pm CET</strong>.
-       </p>
+        <p>
+          Exchange rates are usually updated by <strong>3pm CET</strong>.
+        </p>
+      </section>
 
-       <footer>
+      <footer>
          This API comes with absolutely no warranty.
-       </footer>
+      </footer>
     </div>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
+    <script>
+      $(function() {
+        jsonUptimeRobotApi = function(data) {
+          var ratio = Number(data.monitors.monitor[0].alltimeuptimeratio).toFixed(2);
+          var message = '\<p>The all-time uptime ratio is <strong>' + ratio + '%<\/strong>.<\/p>';
+          $('section').append(message);
+        }
+        $.ajax({
+          url: 'http://api.uptimerobot.com/getMonitors?apiKey=m775958873-595bcad2074d63b4b9765df8&format=json',
+          dataType: 'jsonp'
+        });
+      });
+    </script>
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-36475354-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
   </body>
 </html>
