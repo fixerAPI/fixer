@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+ruby '2.1.1'
+
 gem 'fixer'
 gem 'pg'
 gem 'rake'
