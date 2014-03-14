@@ -1,6 +1,6 @@
 namespace :db do
   desc 'Run database migrations'
-  task :migrate do
+  task migrate: :environment do
     Sequel.extension(:migration)
     db = Sequel::DATABASES.first
     dir = App.root.join('db/migrate')
