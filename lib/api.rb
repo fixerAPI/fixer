@@ -22,14 +22,11 @@ get '/' do
   redirect 'http://fixer.io'
 end
 
-get '/favicon.ico' do
-  halt 404
-end
-
 get '/latest' do
   jsonp snapshot
 end
 
-get '/:date' do
+get %r{([\d-]+)} do |date|
+  params[:date] = date
   jsonp snapshot
 end
