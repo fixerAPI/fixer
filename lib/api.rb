@@ -22,6 +22,10 @@ get '/' do
   redirect 'http://fixer.io'
 end
 
+get '/favicon.ico' do
+  halt 404
+end
+
 get '/latest' do
   jsonp snapshot
 end
