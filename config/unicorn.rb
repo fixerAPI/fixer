@@ -1,2 +1,7 @@
-worker_processes 4 # amount of unicorn workers to spin up
-timeout 30         # restarts workers that hang for 30 seconds
+preload_app true
+worker_processes 4
+timeout 10
+
+before_fork do |_, _|
+  Sequel::DATABASES.each { |db| db.disconnect }
+end
