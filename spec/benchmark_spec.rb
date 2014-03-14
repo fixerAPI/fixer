@@ -1,6 +1,6 @@
 require_relative 'helper'
 require 'rack/test'
-require 'app'
+require 'server'
 
 if ENV['BENCH']
   describe 'benchmark the app' do

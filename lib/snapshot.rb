@@ -1,5 +1,5 @@
 require 'virtus'
-require 'db'
+require 'currency'
 
 class Snapshot
   include Virtus

@@ -1,8 +1,7 @@
-$: << 'lib'
-
-require 'fixer'
+require_relative 'config/environment'
 require 'rake/testtask'
-require 'db'
+require 'currency'
+require 'fixer'
 
 namespace :rates do
   desc 'Reload all rates'

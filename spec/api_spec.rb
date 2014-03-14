@@ -1,8 +1,8 @@
 require_relative 'helper'
 require 'rack/test'
-require 'app'
+require 'api'
 
-describe 'the application' do
+describe 'the API' do
   include Rack::Test::Methods
 
   let(:app)  { Sinatra::Application }
