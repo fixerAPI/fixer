@@ -2,7 +2,7 @@ require 'virtus'
 require 'currency'
 
 class Snapshot
-  include Virtus
+  include Virtus.model
 
   attribute :base, String, default: 'EUR'
   attribute :date, Date
