@@ -28,6 +28,9 @@ GEM
     raindrops (0.13.0)
     rake (10.1.1)
     sequel (4.8.0)
+    sequel_pg (1.6.8)
+      pg (>= 0.8.0)
+      sequel (>= 3.39.0)
     shotgun (0.9)
       rack (>= 1.0)
     sinatra (1.4.4)
@@ -57,10 +60,9 @@ PLATFORMS
 DEPENDENCIES
   fixer
   minitest
-  pg
   rack-test
   rake
-  sequel
+  sequel_pg
   shotgun
   sinatra-jsonp
   unicorn
