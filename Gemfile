@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'fixer'
 gem 'pg'
+gem 'rake'
 gem 'sequel'
 gem 'sinatra-jsonp'
 gem 'unicorn'

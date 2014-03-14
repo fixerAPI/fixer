@@ -16,6 +16,7 @@ GEM
     rack-test (0.6.2)
       rack (>= 1.0)
     raindrops (0.11.0)
+    rake (10.1.1)
     sequel (3.46.0)
     shotgun (0.9)
       rack (>= 1.0)
@@ -44,6 +45,7 @@ DEPENDENCIES
   minitest
   pg
   rack-test
+  rake
   sequel
   shotgun
   sinatra-jsonp
