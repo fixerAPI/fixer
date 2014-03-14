@@ -2,7 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="description" content="Fixer is a JSON API for foreign exchange rates.">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Fixer.io is a foreign exchange rates and currency conversion JSON and JSONP API. It returns current as well as historical data. Rates are updated by 3pm CET.">
     <title>Fixer</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <style type="text/css">
@@ -23,22 +25,30 @@
       }
       #wrapper {
         margin: 0 auto;
-        max-width: 460px;
+        max-width: 600px;
         padding: 10px;
       }
       header {
-        padding: 3em 0;
+        padding-top: 3em;
+        padding-bottom: 1em;
+        text-align: center;
       }
       header h1 {
-        font: bold 36px/1.25 'Open Sans', sans-serif;
+        font: bold 45px/1.5 'Open Sans', sans-serif;
+      }
+      header h2 {
+        font: normal 30px/1.5 'Open Sans', sans-serif;
+      }
+      header img {
+        max-width: 200px;
       }
       p {
         padding-bottom: 1em;
       }
       code {
-        border-radius: 5px;
+        border-radius: 3px;
         background: #fff;
-        border: 1px solid #ccc;
+        border: 1px solid #bbb;
         display: block;
         font-size: 11px;
         margin-bottom: 2em;
@@ -51,17 +61,22 @@
       footer {
         color: #555;
         font-size: 11px;
-        padding: 3em 0;
+        padding: 2em 0 0;
       }
       footer a {
         color: #333;
+      }
+      footer p {
+        text-align: center;
       }
     </style>
   </head>
   <body>
     <div id="wrapper">
       <header>
-        <h1>Fixer: A JSON API for exchange rates</h1>
+        <h1>Fixer.io</h1>
+        <h2>JSON API for foreign exchange rates and currency conversion</h2>
+        <img alt="logo" src="img/money.png">
       </header>
 
       <section>
@@ -113,10 +128,14 @@
         <p>
           Exchange rates are usually updated by <strong>3pm CET</strong>.
         </p>
+
+        <p class="warranty">
+          This API comes with absolutely no warranty.
+        </p>
       </section>
 
       <footer>
-         This API comes with absolutely no warranty.
+        <p>Handcrafted by <a href="http://hakanensari.com">Hakan Ensari</a></p>
       </footer>
     </div>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
@@ -124,8 +143,8 @@
       $(function() {
         jsonUptimeRobotApi = function(data) {
           var ratio = Number(data.monitors.monitor[0].alltimeuptimeratio).toFixed(2);
-          var message = '\<p>The all-time uptime ratio is <strong>' + ratio + '%<\/strong>.<\/p>';
-          $('section').append(message);
+          var message = '\<p>While this API comes with absolutely no warranty, its all-time uptime ratio is <strong>' + ratio + '%<\/strong>.<\/p>';
+          $('.warranty').html(message);
         }
         $.ajax({
           url: 'http://api.uptimerobot.com/getMonitors?apiKey=m775958873-595bcad2074d63b4b9765df8&format=json',
