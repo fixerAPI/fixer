@@ -9,7 +9,7 @@ class Snapshot
 
   def quote
     self.date = if date
-      Currency.where("date <= '#{date}'").order(:date).last.date
+      Currency.where{date <= date}.order(:date).last.date
     else
       Currency.last_date
     end
