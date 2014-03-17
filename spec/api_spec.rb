@@ -27,6 +27,7 @@ describe 'the API' do
   it 'returns historical data' do
     get '/2012-11-20'
     json['rates'].wont_be :empty?
+    json['date'].must_equal '2012-11-20'
   end
 
   it 'works around holidays' do
