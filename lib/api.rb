@@ -16,17 +16,29 @@ helpers do
 
     quotes
   end
-end
 
-get '/' do
-  redirect 'http://fixer.io'
+  def process_date
+    params[:date] = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+  end
+
+  def halt_with_meaningful_response(status, message)
+    halt status, "#{message}. Please read http://fixer.io."
+  end
 end
 
 get '/latest' do
   jsonp snapshot
 end
 
-get %r{([\d-]+)} do |date|
-  params[:date] = date
+get %r((?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})) do
+  process_date
   jsonp snapshot
+end
+
+not_found do
+  halt_with_meaningful_response 404, 'Not found'
+end
+
+error ArgumentError do
+  halt_with_meaningful_response 422, env['sinatra.error'].message.capitalize
 end
