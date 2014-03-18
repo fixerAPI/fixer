@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Fixer.io is a foreign exchange rates and currency conversion JSON and JSONP API. It returns current as well as historical data. Rates are updated by 3pm CET.">
-    <title>Fixer.io: Foreign exchange rates and currency conversion JSON API</title>
+    <meta name="description" content="Fixer.io is a free foreign exchange rates and currency conversion JSON API. It returns current as well as historical data and is updated daily.">
+    <title>Foreign exchange rates and currency conversion JSON API</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <style type="text/css">
       * {
@@ -81,8 +81,7 @@
 
       <section>
         <p>
-          Get the latest foreign exchange reference rates, quoted against the
-          euro.
+          Get the latest foreign exchange reference rates in JSON format.
         </p>
         <code>
           curl http://api.fixer.io/latest
@@ -96,8 +95,8 @@
         </code>
 
         <p>
-          Quote against a currency by setting the <strong>base</strong> parameter
-          in your request.
+          Rates are quoted against the Euro by default. Quote against a different
+          currency by setting the <strong>base</strong> parameter in your request.
         </p>
         <code>
           curl http://api.fixer.io/latest?base=USD
@@ -119,11 +118,15 @@
         </code>
 
         <p>
-          <strong>HTTPS</strong> endpoints are available.
+          An <strong>HTTPS</strong> endpoint is available.
         </p>
         <code>
           curl https://api.fixer.io/latest
         </code>
+
+        <p>
+          Fixer.io works seamlessly with <a href="http://josscrowcroft.github.io/money.js/">money.js</a>.
+        </p>
 
         <p>
           Exchange rates are usually updated by <strong>3pm CET</strong>.
