@@ -5,6 +5,10 @@ require 'snapshot'
 
 set :root, File.expand_path('..', File.dirname(__FILE__))
 
+configure :production do
+  require 'newrelic_rpm'
+end
+
 helpers do
   def snapshot
     quotes = Snapshot.new(params).quote
