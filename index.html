@@ -23,6 +23,9 @@
         color: #333;
         font: 15px/1.5 'Open Sans', sans-serif;
       }
+      a {
+        color: #333;
+      }
       #wrapper {
         margin: 0 auto;
         max-width: 600px;
@@ -42,7 +45,7 @@
       header img {
         max-width: 200px;
       }
-      p {
+      p, h3 {
         padding-bottom: 1em;
       }
       code {
@@ -80,6 +83,12 @@
       </header>
 
       <section>
+        <p>
+          Fixer.io is a <a href="https://github.com/hakanensari/fixer-io">free</a> JSON API for foreign exchange rates, based on the <a href="http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html">daily feed</a> of the European Central Bank. It works great with the <a href="http://josscrowcroft.github.io/money.js/">money.js</a> library.
+        </p>
+
+        <h3>Usage</h3>
+
         <p>
           Get the latest foreign exchange reference rates in JSON format.
         </p>
@@ -136,13 +145,8 @@
           <!--googleon: all-->
         </code>
 
-        <p>
-          Fixer.io works seamlessly with <a href="http://josscrowcroft.github.io/money.js/">money.js</a>.
-          Exchange rates are usually updated by <strong>3pm CET</strong>.
-        </p>
-
         <p class="warranty">
-          This API comes with absolutely no warranty.
+          This API comes with no warranty.
         </p>
       </section>
 
@@ -153,15 +157,18 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
     <script>
       $(function() {
+
+        // Fill in Uptime Ratio
         jsonUptimeRobotApi = function(data) {
           var ratio = Number(data.monitors.monitor[0].alltimeuptimeratio).toFixed(2);
-          var message = '\<p>While this API comes with absolutely no warranty, its all-time uptime ratio is <strong>' + ratio + '%<\/strong>.<\/p>';
+          var message = '\<p>This API has an all-time uptime ratio of ' + ratio + '% but comes with no warranty.<\/p>';
           $('.warranty').html(message);
         }
         $.ajax({
           url: 'http://api.uptimerobot.com/getMonitors?apiKey=m775958873-595bcad2074d63b4b9765df8&format=json',
           dataType: 'jsonp'
         });
+
       });
     </script>
     <script>
