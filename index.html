@@ -57,9 +57,16 @@
         margin-bottom: 2em;
         padding: 1em;
       }
+      code a:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
       code:before {
         color: #006ce1;
         content: '$ ';
+      }
+      pre {
+        margin-left: 1.15em;
       }
       footer {
         color: #555;
@@ -92,58 +99,46 @@
         <p>
           Get the latest foreign exchange reference rates in JSON format.
         </p>
-        <code>
-          <!--googleoff: all-->
-          curl http://api.fixer.io/latest
-          <!--googleon: all-->
-        </code>
+        <!--googleoff: all-->
+        <code>curl "<a>http://api.fixer.io/latest</a>"</code>
+        <!--googleon: all-->
 
         <p>
           Get historical rates for any day since 1999.
         </p>
-        <code>
-          <!--googleoff: all-->
-          curl http://api.fixer.io/2000-01-03
-          <!--googleon: all-->
-        </code>
+        <!--googleoff: all-->
+        <code>curl "<a>http://api.fixer.io/2000-01-03</a>"</code>
+        <!--googleon: all-->
 
         <p>
           Rates are quoted against the Euro by default. Quote against a different
           currency by setting the <strong>base</strong> parameter in your request.
         </p>
-        <code>
-          <!--googleoff: all-->
-          curl http://api.fixer.io/latest?base=USD
-          <!--googleon: all-->
-        </code>
+        <!--googleoff: all-->
+        <code>curl "<a>http://api.fixer.io/latest?base=USD</a>"</code>
+        <!--googleon: all-->
 
         <p>
           Request specific exchange rates by setting the
           <strong>symbols</strong> or <strong>currencies</strong> parameter.
         </p>
-        <code>
-          <!--googleoff: all-->
-          curl http://api.fixer.io/latest?symbols=USD,GBP
-          <!--googleon: all-->
-        </code>
+        <!--googleoff: all-->
+        <code>curl "<a>http://api.fixer.io/latest?symbols=USD,GBP</a>"</code>
+        <!--googleon: all-->
 
         <p>
           Make cross-domain <strong>JSONP</strong> requests.
         </p>
-        <code>
-          <!--googleoff: all-->
-          curl http://api.fixer.io/latest?callback=myCallback
-          <!--googleon: all-->
-        </code>
+        <!--googleoff: all-->
+        <code>curl "<a>http://api.fixer.io/latest?callback=?</a>"</code>
+        <!--googleon: all-->
 
         <p>
           An <strong>HTTPS</strong> endpoint is available.
         </p>
-        <code>
-          <!--googleoff: all-->
-          curl https://api.fixer.io/latest
-          <!--googleon: all-->
-        </code>
+        <!--googleoff: all-->
+        <code>curl "<a>https://api.fixer.io/latest</a>"</code>
+        <!--googleon: all-->
 
         <p class="warranty">
           This API comes with no warranty.
@@ -157,6 +152,25 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.3/zepto.min.js"></script>
     <script>
       $(function() {
+
+        // Make examples clickable
+        $('code').each(function() {
+          var $this = $(this);
+          var url = $this.html().match(/<a>([^<]+)/)[1];
+          url += (/\?/.test(url) ? '&' : '?') + 'callback=?';
+
+          $this.on('click', function(e) {
+            $.ajax({
+              url: url,
+              success: function(data) {
+                $this.append('<pre>' + JSON.stringify(data, undefined, 4) + '</pre>');
+                $this.off();
+                var $link = $('a', $this);
+                $link.replaceWith($link.html());
+              }
+            })
+          });
+        });
 
         // Fill in Uptime Ratio
         jsonUptimeRobotApi = function(data) {
