@@ -160,15 +160,17 @@
           url += (/\?/.test(url) ? '&' : '?') + 'callback=?';
 
           $this.on('click', function(e) {
-            $.ajax({
-              url: url,
-              success: function(data) {
-                $this.append('<pre>' + JSON.stringify(data, undefined, 4) + '</pre>');
-                $this.off();
-                var $link = $('a', $this);
-                $link.replaceWith($link.html());
-              }
-            })
+            var $pre = $this.find('pre');
+            if ($pre.length) {
+              $pre.remove();
+            } else {
+              $.ajax({
+                url: url,
+                success: function(data) {
+                  $this.append('<pre>' + JSON.stringify(data, undefined, 4) + '</pre>');
+                }
+              });
+            }
           });
         });
 
