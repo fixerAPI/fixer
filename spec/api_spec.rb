@@ -44,4 +44,9 @@ describe 'the API' do
     get '/'
     last_response.status.must_equal 404
   end
+
+  it 'handles malformed queries' do
+    get 'latest?base=USD?callback=?'
+    last_response.must_be :unprocessable?
+  end
 end

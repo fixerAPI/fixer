@@ -26,7 +26,7 @@ helpers do
   end
 
   def halt_with_meaningful_response(status, message)
-    halt status, "#{message}. Please read http://fixer.io."
+    halt status, message
   end
 end
 
