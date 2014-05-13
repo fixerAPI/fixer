@@ -7,6 +7,8 @@ set :root, File.expand_path('..', File.dirname(__FILE__))
 
 configure :production do
   require 'newrelic_rpm'
+
+  use Honeybadger::Rack
 end
 
 helpers do
