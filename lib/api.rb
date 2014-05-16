@@ -7,6 +7,10 @@ set :root, File.expand_path('..', File.dirname(__FILE__))
 
 configure :production do
   require 'newrelic_rpm'
+  require 'librato-rack'
+
+  use Honeybadger::Rack
+  use Librato::Rack
 end
 
 helpers do
@@ -26,7 +30,7 @@ helpers do
   end
 
   def halt_with_meaningful_response(status, message)
-    halt status, "#{message}. Please read http://fixer.io."
+    halt status, message
   end
 end
 

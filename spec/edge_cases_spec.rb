@@ -26,4 +26,9 @@ describe 'the API' do
     get '/latest?base=UAH'
     last_response.must_be :unprocessable?
   end
+
+  it 'handles malformed queries' do
+    get 'latest?base=USD?callback=?'
+    last_response.must_be :unprocessable?
+  end
 end

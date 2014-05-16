@@ -31,7 +31,6 @@ class Snapshot
     if base.upcase! != 'EUR'
       denominator = rates.update('EUR' => 1.0).delete(base)
       raise ArgumentError.new('Invalid base') unless denominator
-
       rates.each do |iso_code, rate|
         rates[iso_code] = round(rate / denominator)
       end
