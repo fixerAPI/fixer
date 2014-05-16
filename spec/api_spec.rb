@@ -7,7 +7,6 @@ describe 'the API' do
 
   let(:app)  { Sinatra::Application }
   let(:json) { Yajl::Parser.new.parse last_response.body }
-  let(:status) { last_response.status }
 
   it 'returns latest snapshot' do
     get '/latest'
@@ -33,15 +32,5 @@ describe 'the API' do
   it 'works around holidays' do
     get '/2010-01-01'
     json['rates'].wont_be :empty?
-  end
-
-  it 'considers an invalid date unprocessable' do
-    get '/2010-31-01'
-    last_response.must_be :unprocessable?
-  end
-
-  it 'handles unfound pages' do
-    get '/'
-    last_response.status.must_equal 404
   end
 end
