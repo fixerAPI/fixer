@@ -34,6 +34,10 @@ helpers do
   end
 end
 
+get '/' do
+  jsonp(name: 'Fixer', description: 'JSON API for foreign exchange rates and currency conversion', docs: 'http://fixer.io')
+end
+
 get '/latest' do
   jsonp snapshot
 end

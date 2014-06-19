@@ -8,6 +8,11 @@ describe 'the API' do
   let(:app)  { Sinatra::Application }
   let(:json) { Yajl::Parser.new.parse last_response.body }
 
+  it 'describes itself' do
+    get '/'
+    last_response.must_be :ok?
+  end
+
   it 'returns latest snapshot' do
     get '/latest'
     last_response.must_be :ok?
