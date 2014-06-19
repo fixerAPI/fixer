@@ -30,7 +30,7 @@ helpers do
   end
 
   def halt_with_meaningful_response(status, message)
-    halt status, message
+    halt status, Yajl::Encoder.encode(error: { status: status, message: message })
   end
 end
 
