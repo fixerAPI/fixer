@@ -8,7 +8,7 @@ describe 'the API' do
   let(:app)  { Sinatra::Application }
 
   it 'handles unfound pages' do
-    get '/'
+    get '/foo'
     last_response.status.must_equal 404
   end
 
