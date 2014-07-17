@@ -157,15 +157,15 @@
     url: 'http://api.fixer.io/latest',
     success: function(data) {
         fx.rates = data.rates;
-        var rate = fx.convert(1, {
-            from: 'GBP',
-            to: 'USD'
-        });
-        var rounded = Math.round(rate * 100) / 100;
-
-        alert('£1 is worth US$' + rounded + ' today.');
+        demo();
     }
-});    </code>
+});
+
+var demo = function() {
+    var rate = fx.convert(1, { from: 'GBP', to: 'USD' });
+    var rounded = Math.round(rate * 100) / 100;
+    alert('£1 is worth US$' + rounded + ' today.');
+}       </code>
         <!--googleon: all-->
 
         <p class="warranty">
