@@ -12,21 +12,13 @@
         margin: 0;
         padding: 0;
       }
-      body, html {
-        height: 100%;
-      }
       body {
-        background:        -linear-gradient(left, #fff 0%, #eee 100%);
-        background:     -ms-linear-gradient(left, #fff 0%, #eee 100%);
-        background:    -moz-linear-gradient(left, #fff 0%, #eee 100%);
-        background: -webkit-linear-gradient(left, #fff 0%, #eee 100%);
-        color: #333;
         font: 15px/1.5 'Open Sans', sans-serif;
       }
-      a {
-        color: #555;
+      body, a {
+        color: #282828;
       }
-      #wrapper {
+      .wrapper {
         margin: 0 auto;
         max-width: 600px;
         padding: 10px;
@@ -76,20 +68,17 @@
         margin-left: 1.15em;
       }
       footer {
-        color: #555;
         font-size: 11px;
-        padding: 2em 0 0;
-      }
-      footer a {
-        color: #333;
+        margin-top: 2em;
+        text-align: center;
       }
       footer p {
-        text-align: center;
+        margin-top: 1em;
       }
     </style>
   </head>
   <body>
-    <div id="wrapper">
+    <div class="wrapper">
       <header>
         <h1>Fixer.io</h1>
         <h2>JSON API for foreign exchange rates and currency conversion</h2>
@@ -163,8 +152,8 @@
 
 var demo = function() {
     var rate = fx(1).from('GBP').to('USD');
-    var rounded = Math.round(rate * 100) / 100;
-    alert('£1 is worth US$' + rounded + ' today.');
+    var round = Math.round(rate * 100) / 100;
+    alert('£1 equals US$' + round);
 }       </code>
         <!--googleon: all-->
 
@@ -174,6 +163,7 @@ var demo = function() {
       </section>
 
       <footer>
+        <script id='fbx4gu8'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=hakanensari&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbx4gu8');</script>
         <p>Handcrafted by <a href="http://hakanensari.com">Hakan Ensari</a></p>
       </footer>
     </div>
@@ -226,6 +216,15 @@ var demo = function() {
         });
 
       });
+
+      // Google Analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-36475354-1', 'auto');
+      ga('send', 'pageview');
     </script>
   </body>
 </html>
