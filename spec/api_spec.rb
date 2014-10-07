@@ -7,6 +7,7 @@ describe 'the API' do
 
   let(:app)  { Sinatra::Application }
   let(:json) { Yajl::Parser.new.parse last_response.body }
+  let(:headers) { last_response.headers }
 
   it 'describes itself' do
     get '/'
@@ -37,5 +38,10 @@ describe 'the API' do
   it 'works around holidays' do
     get '/2010-01-01'
     json['rates'].wont_be :empty?
+  end
+
+  it 'allows cross-origin requests' do
+    get '/', {}, { 'HTTP_ORIGIN' => 'http://localhost' }
+    assert_equal 'http://localhost', headers['Access-Control-Allow-Origin']
   end
 end

@@ -1,9 +1,13 @@
 require 'sinatra'
+require 'sinatra/cross_origin'
 require 'sinatra/jsonp'
 require 'yajl'
 require 'snapshot'
 
-set :root, File.expand_path('..', File.dirname(__FILE__))
+configure do
+  enable :cross_origin
+  set :root, File.expand_path('..', File.dirname(__FILE__))
+end
 
 configure :production do
   require 'newrelic_rpm'
