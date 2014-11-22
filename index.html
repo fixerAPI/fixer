@@ -37,30 +37,8 @@
       header img {
         max-width: 200px;
       }
-      dl, h3, p {
+      h3, p {
         padding-bottom: 1em;
-      }
-      .status dd, .status dt {
-        display: inline-block;
-        color: #fff;
-        font-size: 11px;
-        padding: 1px 6px;
-      }
-      .status dt {
-        background-color: #303030;
-        border-top-left-radius: 2px;
-        border-bottom-left-radius: 2px;
-      }
-      .status dd {
-        background-color: #777;
-        border-top-right-radius: 2px;
-        border-bottom-right-radius: 2px;
-      }
-      .status dd.up {
-        background-color: green;
-      }
-      .status dd.down {
-        background-color: red;
       }
       code {
         border-radius: 3px;
@@ -90,12 +68,8 @@
         margin-left: 1.15em;
       }
       footer {
-        font-size: 11px;
-        margin-top: 2em;
+        margin-bottom: 2em;
         text-align: center;
-      }
-      footer p {
-        margin-top: 1em;
       }
     </style>
   </head>
@@ -112,9 +86,8 @@
           Fixer.io is a free JSON API for current and historical foreign exchange rates. It relies on daily feeds published by the <a href="http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html" target="_blank">European Central Bank</a>.
         </p>
         <p>
-          Fork the source code on <a href="https://github.com/hakanensari/fixer-io" target="_blank">GitHub</a>.
+          View the source code on <a href="https://github.com/hakanensari/fixer-io" target="_blank">GitHub</a>.
         </p>
-        <a href="http://api.uptimerobot.com/getMonitors?apiKey=m775958873-595bcad2074d63b4b9765df8" target="_blank"><dl class="status"><dt>status</dt><dd>unknown</dd></dl></a>
 
         <h3>Usage</h3>
 
@@ -189,8 +162,7 @@ var demo = function() {
       </section>
 
       <footer>
-        <script id='fbx4gu8'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=hakanensari&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbx4gu8');</script>
-        <p>Handcrafted by <a href="http://hakanensari.com" target="_blank">Hakan Ensari</a></p>
+        <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       </footer>
     </div>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.3/zepto.min.js"></script>
@@ -231,20 +203,10 @@ var demo = function() {
         });
 
         // Fill in Uptime Ratio
-
         jsonUptimeRobotApi = function(data) {
           var monitor = data.monitors.monitor[0];
-
-          var status = {
-            '0': 'unknown',
-            '1': 'unknown',
-            '2': 'up',
-            '8': 'down',
-            '9': 'down'
-          }[monitor.status];
           var ratio = Number(monitor.alltimeuptimeratio).toFixed(2);
           var message = '\<p>This API has an uptime ratio of <a href="http://api.uptimerobot.com/getMonitors?apiKey=m775958873-595bcad2074d63b4b9765df8" target="_blank">' + ratio + '%</a> since <a href="https://github.com/hakanensari/fixer-io/commit/97e3" target="_blank">20 November 2012</a> but comes with no warranty.<\/p>';
-          $('.status dd').html(status).addClass(status);
           $('.warranty').html(message);
         }
         $.ajax({
