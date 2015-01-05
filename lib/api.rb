@@ -13,7 +13,6 @@ configure :production do
   require 'newrelic_rpm'
   require 'librato-rack'
 
-  use Honeybadger::Rack
   use Librato::Rack
 end
 
