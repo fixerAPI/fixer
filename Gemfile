@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 ruby '2.2.0'
 
 gem 'fixer'
-gem 'honeybadger'
+gem 'rollbar'
 gem 'newrelic_rpm'
 gem 'librato-rack'
 gem 'rake'
