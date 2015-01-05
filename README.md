@@ -1,3 +1,1 @@
-# Fixer.io
-
-This is the source code of [Fixer.io](http://fixer.io).
+[![Travis](https://travis-ci.org/hakanensari/fixer-io.svg)](https://travis-ci.org/hakanensari/fixer-io)

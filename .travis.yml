@@ -1,0 +1,9 @@
+deploy:
+  provider: heroku
+  api_key:
+    secure: KfNLOG7IsAno2IQ3R9DikQ7nVhAGbYQitf6NbJo1jzA7eu/rKNAmqYoJyaNuwEoAd8Dwz98PtQEJb3DmAhtX3xJgZC1BKNPMh9s0NCQO03OsD7cRbyqeyJFgxSH+p+yKC3nILmaxTSLPji3w+h3Qg+Lu1SA+Q6KmxxeajUUSThc=
+  app: fixer
+  on:
+    repo: hakanensari/fixer-io
+rvm:
+  - 2.2.0
