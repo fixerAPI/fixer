@@ -39,7 +39,7 @@ helpers do
 end
 
 get '/' do
-  jsonp(name: 'Fixer.io', description: 'JSON API for foreign exchange rates and currency conversion', docs: 'http://fixer.io')
+  jsonp(description: 'Fixer.io is a JSON API for foreign exchange rates and currency conversion', docs: 'http://fixer.io')
 end
 
 get '/latest' do
