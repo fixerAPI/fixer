@@ -7,3 +7,5 @@ deploy:
     repo: hakanensari/fixer-io
 rvm:
   - 2.2.0
+before_script:
+  - psql -c 'create database fixer_test;' -U postgres
