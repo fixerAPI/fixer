@@ -83,10 +83,10 @@
 
       <section>
         <p>
-          Fixer.io is a free JSON API for current and historical foreign exchange rates. It relies on daily feeds published by the <a href="http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html" target="_blank">European Central Bank</a>.
+          Fixer.io is a free JSON API for current and historical foreign exchange rates published by the European Central Bank.
         </p>
         <p>
-          View the source code on <a href="https://github.com/hakanensari/fixer-io" target="_blank">GitHub</a>.
+          View its <a href="https://github.com/hakanensari/fixer-io" target="_blank">source code</a>.
         </p>
 
         <h3>Usage</h3>
@@ -136,28 +136,26 @@
         <!--googleon: all-->
 
         <p>
-          Fixer.io works great in the browser with <a href="http://openexchangerates.github.io/money.js/" target="_blank">money.js</a>.
+          Fixer.io works with <a href="http://openexchangerates.github.io/money.js/" target="_blank">money.js</a>.
         </p>
 
         <!--googleoff: all-->
-        <code class="js">$.ajax({
-    dataType: 'jsonp',
-    url: 'http://api.fixer.io/latest',
-    success: function(data) {
-        fx.rates = data.rates;
-        demo();
-    }
-});
+        <code class="js">$.getJSON('http://api.fixer.io/latest',
+      function(data) {
+          fx.rates = data.rates;
+          demo();
+      }
+);
 
 var demo = function() {
     var rate = fx(1).from('GBP').to('USD');
     var round = Math.round(rate * 100) / 100;
-    alert('£1 equals US$' + round);
+    alert('£1.00 = $' + round);
 }       </code>
         <!--googleon: all-->
 
         <p class="warranty">
-          This API comes with no warranty.
+          Fixer.io comes with no warranty.
         </p>
       </section>
 
@@ -205,12 +203,12 @@ var demo = function() {
         // Fill in Uptime Ratio
         jsonUptimeRobotApi = function(data) {
           var monitor = data.monitors.monitor[0];
-          var ratio = Number(monitor.alltimeuptimeratio).toFixed(2);
-          var message = '\<p>This API has an uptime ratio of <a href="http://api.uptimerobot.com/getMonitors?apiKey=m775958873-595bcad2074d63b4b9765df8" target="_blank">' + ratio + '%</a> since <a href="https://github.com/hakanensari/fixer-io/commit/97e3" target="_blank">20 November 2012</a> but comes with no warranty.<\/p>';
+          var ratio = Number(monitor.customuptimeratio).toFixed(2);
+          var message = '\<p>Fixer.io has an uptime ratio of ' + ratio + '% in the last 30 days.<\/p>';
           $('.warranty').html(message);
         }
         $.ajax({
-          url: 'http://api.uptimerobot.com/getMonitors?apiKey=m775958873-595bcad2074d63b4b9765df8&format=json',
+          url: 'http://api.uptimerobot.com/getMonitors?apiKey=m775958873-595bcad2074d63b4b9765df8&format=json&customUptimeRatio=30',
           dataType: 'jsonp'
         });
 
