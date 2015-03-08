@@ -24,8 +24,8 @@
         padding: 10px;
       }
       header {
-        padding-top: 3em;
-        padding-bottom: 1em;
+        padding-top: 2em;
+        padding-bottom: 2em;
         text-align: center;
       }
       header h1 {
@@ -35,6 +35,8 @@
         font: normal 30px/1.5 'Open Sans', sans-serif;
       }
       header img {
+        display: block;
+        margin: 0 auto;
         max-width: 200px;
       }
       h3, p {
@@ -68,8 +70,12 @@
         margin-left: 1.15em;
       }
       footer {
-        margin-bottom: 2em;
+        margin-bottom: 1em;
         text-align: center;
+      }
+      footer .referral img {
+          width: 120px;
+          opacity: 0.9;
       }
     </style>
   </head>
@@ -79,14 +85,12 @@
         <h1>Fixer.io</h1>
         <h2>JSON API for foreign exchange rates and currency conversion</h2>
         <img alt="logo" src="img/money.png">
+        <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       </header>
 
       <section>
         <p>
-          Fixer.io is a free JSON API for current and historical foreign exchange rates published by the European Central Bank.
-        </p>
-        <p>
-          View its <a href="https://github.com/hakanensari/fixer-io" target="_blank">source code</a>.
+          Fixer.io is a free, <a href="https://github.com/hakanensari/fixer-io" target="_blank">open-source</a> JSON API for current and historical foreign exchange rates published by the European Central Bank.
         </p>
 
         <h3>Usage</h3>
@@ -136,7 +140,7 @@
         <!--googleon: all-->
 
         <p>
-          Fixer.io works with <a href="http://openexchangerates.github.io/money.js/" target="_blank">money.js</a>.
+          Use <a href="http://openexchangerates.github.io/money.js/" target="_blank">money.js</a> in the browser.
         </p>
 
         <!--googleoff: all-->
@@ -157,15 +161,25 @@ var demo = function() {
         <p class="warranty">
           Fixer.io comes with no warranty.
         </p>
+
       </section>
 
       <footer>
-        <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <a class="referral" href="https://www.digitalocean.com/?refcode=7375a8447b75" target="_blank"><img alt="Digital Ocean" src="img/do.png"></a>
       </footer>
     </div>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.3/zepto.min.js"></script>
     <script src="js/money.js"></script>
     <script>
+      // Google Analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-36475354-1', 'auto');
+      ga('send', 'pageview');
+
       $(function() {
 
         // Make shell examples clickable
@@ -212,16 +226,11 @@ var demo = function() {
           dataType: 'jsonp'
         });
 
+        // Google Analytics events
+        $('.referral').click(function() {
+          ga('send', 'event', 'a', 'click', 'digitalocean');
+        });
       });
-
-      // Google Analytics
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-36475354-1', 'auto');
-      ga('send', 'pageview');
     </script>
   </body>
 </html>
