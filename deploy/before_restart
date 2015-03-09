@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+oldrev, newrev = ARGV
+
+def run(cmd)
+  exit($?.exitstatus) unless system "umask 002 && #{cmd}"
+end
+
+run "foreman run bundle install --deployment --without development:test"
+
+tasks = []
+num_migrations = `git diff #{oldrev} #{newrev} --diff-filter=A --name-only -z db/migrate`.split("\0").size
+tasks << "db:migrate" if num_migrations > 0
+tasks << "rates:update"
+
+run "foreman run bundle exec rake #{tasks.join(" ")}" if tasks.any?

@@ -3,7 +3,7 @@ require 'pathname'
 
 module App
   class << self
-    attr :logger
+    attr_reader :logger
 
     def env
       ENV['RACK_ENV'] || 'development'
@@ -11,6 +11,10 @@ module App
 
     def root
       Pathname.pwd
+    end
+
+    def version
+      `git rev-parse --short HEAD 2>/dev/null`.strip!
     end
   end
 

@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+sudo restart fixer 2>/dev/null || sudo start fixer

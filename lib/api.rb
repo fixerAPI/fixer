@@ -1,3 +1,4 @@
+require 'rollbar/rack'
 require 'sinatra'
 require 'sinatra/cross_origin'
 require 'sinatra/jsonp'
@@ -6,14 +7,10 @@ require 'snapshot'
 
 configure do
   enable :cross_origin
-  set :root, File.expand_path('..', File.dirname(__FILE__))
 end
 
 configure :production do
   require 'newrelic_rpm'
-  require 'librato-rack'
-
-  use Librato::Rack
 end
 
 helpers do
@@ -32,13 +29,13 @@ helpers do
     params[:date] = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
   end
 
-  def halt_with_meaningful_response(status, message)
-    halt status, Yajl::Encoder.encode(error: { status: status, message: message })
+  def halt_with_message(status, message)
+    halt status, Yajl::Encoder.encode(error: message)
   end
 end
 
 get '/' do
-  jsonp(description: 'Fixer.io is a JSON API for foreign exchange rates and currency conversion', docs: 'http://fixer.io')
+  jsonp(details: 'http://fixer.io', version: App.version)
 end
 
 get '/latest' do
@@ -51,9 +48,9 @@ get %r((?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})) do
 end
 
 not_found do
-  halt_with_meaningful_response 404, 'Not found'
+  halt_with_message 404, 'Not found'
 end
 
 error ArgumentError do
-  halt_with_meaningful_response 422, env['sinatra.error'].message.capitalize
+  halt_with_message 422, env['sinatra.error'].message.capitalize
 end

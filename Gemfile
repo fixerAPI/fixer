@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 
-ruby '2.2.0'
+ruby '2.2.1'
 
 gem 'fixer'
 gem 'rollbar'
 gem 'newrelic_rpm'
-gem 'librato-rack'
+gem 'pry'
 gem 'rake'
 gem 'sequel_pg'
 gem 'sinatra-jsonp'

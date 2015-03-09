@@ -1,3 +1,4 @@
-Dir.glob('lib/tasks/*.rake').each { |r| import r }
+require 'rollbar/rake'
 
-task default: %w(db:migrate rates:reload test)
+Dir.glob('lib/tasks/*.rake').each { |r| import r }
+task default: %w(db:migrate rates:load test)

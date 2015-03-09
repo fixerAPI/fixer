@@ -4,8 +4,8 @@ namespace :rates do
     require 'fixer'
   end
 
-  desc 'Reload all rates'
-  task reload: :setup do
+  desc 'Load all rates'
+  task load: :setup do
     Currency.dataset.delete
     data = Fixer::Feed.new(:historical)
     Currency.multi_insert(data.to_a)
