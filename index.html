@@ -25,7 +25,7 @@
       }
       header {
         padding-top: 2em;
-        padding-bottom: 2em;
+        padding-bottom: 1em;
         text-align: center;
       }
       header h1 {
@@ -37,7 +37,7 @@
       header img {
         display: block;
         margin: 0 auto;
-        max-width: 200px;
+        max-width: 150px;
       }
       h3, p {
         padding-bottom: 1em;
@@ -46,9 +46,8 @@
         padding-top: 1em;
       }
       code {
-        border-radius: 3px;
         background: #fff;
-        border: 1px solid #bbb;
+        border: 1px solid #aaa;
         display: block;
         font-size: 11px;
         margin-bottom: 2em;
@@ -69,8 +68,11 @@
       code.js:hover {
         cursor: pointer;
       }
-      pre {
-        margin-left: 1.15em;
+      ol {
+        padding-top: 10px;
+        padding-left: 24px;
+        border-top: 1px solid #aaa;
+        font-size: 12px;
       }
       footer {
         margin-top: 1em;
@@ -157,15 +159,23 @@ var demo = function() {
 }       </code>
         <!--googleon: all-->
 
-        <h3>Notes</h3>
-
+        <ol>
+          <li>
+            The API is hosted on <a class="referral" href="https://www.digitalocean.com/?refcode=7375a8447b75" target="_blank">Digital Ocean</a>.
+          </li>
+          <li>
+            The source code of the API and this page is available on <a href="https://github.com/hakanensari/fixer-io" target="_blank">GitHub</a>.
+          </li>
+          <li class="uptime">
+            We monitor the uptime of the API with <a href="http://uptimerobot.com">UptimeRobot</a>.</li>
+          <li>
+            While up and running since 2012, the API comes with no warranty.
+          </li>
+        </ol>
         <p>
-          Fixer.io was launched in 2012 and is currently hosted on <a class="referral" href="https://www.digitalocean.com/?refcode=7375a8447b75" target="_blank">Digital Ocean</a>.
-          Its source code is available on <a href="https://github.com/hakanensari/fixer-io" target="_blank">GitHub</a>.
-          <span class="uptime"></span>
         </p>
         <p>
-          Fixer.io comes with no warranty.
+
         </p>
       </section>
       <footer>
@@ -223,7 +233,7 @@ var demo = function() {
           var monitor = data.monitors.monitor[0];
           console.log(monitor);
           var ratio = Number(monitor.customuptimeratio).toFixed(2);
-          var message = 'The uptime ratio is ' + ratio + '% in the last 30 days.';
+          var message = 'The 30-day uptime ratio of the API is ' + ratio + '%.';
           $('.uptime').html(message);
         }
         $.ajax({
