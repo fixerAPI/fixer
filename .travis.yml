@@ -1,4 +1,4 @@
 rvm:
-  - 2.2.1
+  - 2.2.2
 before_script:
   - psql -c 'create database fixer_test;' -U postgres
