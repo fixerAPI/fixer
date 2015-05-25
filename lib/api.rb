@@ -21,7 +21,8 @@ helpers do
   def snapshot
     quotes = Snapshot.new(params).quote
 
-    if symbols = params.delete('symbols') || params.delete('currencies')
+    symbols = params.delete('symbols') || params.delete('currencies')
+    if symbols
       symbols = symbols.split(',')
       quotes[:rates].keep_if { |k, _| symbols.include?(k) }
     end
@@ -30,7 +31,9 @@ helpers do
   end
 
   def process_date
-    params[:date] = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+    params[:date] = Date.new(
+      params[:year].to_i, params[:month].to_i, params[:day].to_i
+    )
   end
 
   def halt_with_message(status, message)

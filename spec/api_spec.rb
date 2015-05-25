@@ -41,7 +41,7 @@ describe 'the API' do
   end
 
   it 'allows cross-origin requests' do
-    get '/', {}, { 'HTTP_ORIGIN' => 'http://localhost' }
+    get '/', {}, 'HTTP_ORIGIN' => 'http://localhost'
     assert_equal 'http://localhost', headers['Access-Control-Allow-Origin']
   end
 end

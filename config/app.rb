@@ -1,6 +1,7 @@
 require 'logger'
 require 'pathname'
 
+# Encapsulates app configuration
 module App
   class << self
     attr_reader :logger

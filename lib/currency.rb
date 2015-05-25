@@ -1,3 +1,4 @@
+# Wraps persisted currency data
 class Currency < Sequel::Model
   def self.last_date
     order(:date).last.date

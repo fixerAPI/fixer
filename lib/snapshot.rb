@@ -1,6 +1,7 @@
 require 'virtus'
 require 'currency'
 
+# Quotes exchange rates on a specific date
 class Snapshot
   include Virtus.model
 
@@ -8,13 +9,14 @@ class Snapshot
   attribute :date, Date
 
   def quote
-    self.date = if date
-      last_date = Currency.where("date <= '#{date}'").order(:date).last
-      raise ArgumentError.new('Date too old') unless last_date
-      last_date.date
-    else
-      Currency.last_date
-    end
+    self.date =
+      if date
+        last_date = Currency.where("date <= '#{date}'").order(:date).last
+        fail ArgumentError, 'Date too old' unless last_date
+        last_date.date
+      else
+        Currency.last_date
+      end
 
     attributes.merge(rates: rebase(rates))
   end
@@ -30,7 +32,7 @@ class Snapshot
   def rebase(rates)
     if base.upcase! != 'EUR'
       denominator = rates.update('EUR' => 1.0).delete(base)
-      raise ArgumentError.new('Invalid base') unless denominator
+      fail ArgumentError, 'Invalid base' unless denominator
       rates.each do |iso_code, rate|
         rates[iso_code] = round(rate / denominator)
       end
