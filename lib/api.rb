@@ -9,6 +9,10 @@ configure do
   enable :cross_origin
 end
 
+configure :development do
+  set :show_exceptions, :after_handler
+end
+
 configure :production do
   require 'newrelic_rpm'
 end
@@ -35,14 +39,14 @@ helpers do
 end
 
 get '/' do
-  jsonp(details: 'http://fixer.io', version: App.version)
+  jsonp details: 'http://fixer.io', version: App.version
 end
 
 get '/latest' do
   jsonp snapshot
 end
 
-get %r((?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})) do
+get(/(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/) do
   process_date
   jsonp snapshot
 end
