@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '2.2.1'
+ruby '2.2.2'
 
 gem 'fixer'
 gem 'rollbar'
