@@ -150,16 +150,15 @@
 
         <!--googleoff: all-->
         <code class="js">$.getJSON('http://api.fixer.io/latest',
-      function(data) {
-          fx.rates = data.rates;
-          demo();
-      }
-);
-
+    function(data) {
+        fx.rates = data.rates
+        demo()
+    }
+)
 var demo = function() {
-    var rate = fx(1).from('GBP').to('USD');
-    var round = Math.round(rate * 100) / 100;
-    alert('£1.00 = $' + round);
+    var rate = fx(1).from('GBP').to('USD')
+    var round = Math.round(rate * 100) / 100
+    alert('£1.00 = $' + round)
 }       </code>
         <!--googleon: all-->
 
@@ -180,80 +179,77 @@ var demo = function() {
             While up and running since 2012, the API comes with no warranty.
           </li>
         </ol>
-        <p>
-        </p>
-        <p>
-
-        </p>
       </section>
       <footer>
-        <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+        <iframe src="https://ghbtns.com/github-btn.html?user=hakanensari&repo=fixer-io&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
       </footer>
     </div>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.3/zepto.min.js"></script>
     <script src="js/money.js"></script>
     <script>
-      // Google Analytics
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-36475354-1', 'auto');
-      ga('send', 'pageview');
+      ga('create', 'UA-36475354-1', 'auto')
+      ga('send', 'pageview')
 
       $(function() {
 
         // Make request examples clickable
         $('code.request').each(function() {
-          var $this = $(this);
-          var url = $this.html().match(/<a>([^<]+)/)[1];
-          url += (/\?/.test(url) ? '&' : '?') + 'callback=?';
+          var $this = $(this)
+          var url = $this.html().match(/<a>([^<]+)/)[1]
+          url += (/\?/.test(url) ? '&' : '?') + 'callback=?'
 
           $this.on('click', function(e) {
-            var $pre = $this.find('pre');
+            var $pre = $this.find('pre')
             if ($pre.length) {
-              $pre.remove();
+              $pre.remove()
             } else {
               $.ajax({
                 url: url,
                 success: function(data) {
-                  $this.append('<pre>' + JSON.stringify(data, undefined, 4) + '</pre>');
+                  $this.append('<pre>' + JSON.stringify(data, undefined, 4) + '</pre>')
                 }
-              });
+              })
             }
-          });
-        });
+          })
+        })
 
         // And make the JavaScript clickable
         $('code.js').each(function() {
-          var $this = $(this);
+          var $this = $(this)
 
           $this.on('click', function(e) {
             new Function(
               $this.html()
-            )();
-          });
-        });
+            )()
+          })
+        })
 
         // Fill in Uptime Ratio
         jsonUptimeRobotApi = function(data) {
-          var monitor = data.monitors.monitor[0];
-          console.log(monitor);
-          var ratio = Number(monitor.customuptimeratio).toFixed(2);
-          var message = 'The 30-day uptime ratio of the API is ' + ratio + '%.';
-          $('.uptime').html(message);
+          var monitor = data.monitors.monitor[0]
+          var ratio = Number(monitor.customuptimeratio).toFixed(2)
+          var message = 'The 30-day uptime ratio of the API is ' + ratio + '%.'
+          $('.uptime').html(message)
         }
         $.ajax({
           url: 'http://api.uptimerobot.com/getMonitors?apiKey=m775958873-595bcad2074d63b4b9765df8&format=json&customUptimeRatio=30',
           dataType: 'jsonp'
-        });
+        })
 
         // Google Analytics events
         $('.referral').click(function() {
-          ga('send', 'event', 'a', 'click', 'digitalocean');
-        });
-      });
+          ga('send', 'event', 'a', 'click', 'digitalocean')
+        })
+      })
+    </script>
+    <script>
+      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
     </script>
   </body>
 </html>
