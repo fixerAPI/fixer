@@ -148,17 +148,15 @@
         </p>
 
         <!--googleoff: all-->
-        <code class="js">$.getJSON('http://api.fixer.io/latest',
-    function(data) {
-        fx.rates = data.rates
-        demo()
-    }
-)
-var demo = function() {
-    var rate = fx(1).from('GBP').to('USD')
-    var round = Math.round(rate * 100) / 100
-    alert('£1.00 = $' + round)
-}       </code>
+        <code class="js">var demo = function(data) {
+    fx.rates = data.rates
+    var rate = fx(1).from("GBP").to("USD")
+    var rounded = Math.round(rate * 100) / 100
+    alert("£1.00 = $" + rounded)
+}
+
+$.getJSON("http://api.fixer.io/latest", demo)
+</code>
         <!--googleon: all-->
 
         <ol>
