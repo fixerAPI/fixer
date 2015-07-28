@@ -229,12 +229,12 @@ $.getJSON("http://api.fixer.io/latest", demo)
         // Fill in Uptime Ratio
         jsonUptimeRobotApi = function(data) {
           var monitor = data.monitors.monitor[0]
-          var ratio = Number(monitor.customuptimeratio).toFixed(2)
-          var message = 'The 30-day uptime ratio of the API is ' + ratio + '%.'
+          var ratio = Number(monitor.alltimeuptimeratio).toFixed(2)
+          var message = 'The all time uptime ratio of the API is ' + ratio + '%.'
           $('.uptime').html(message)
         }
         $.ajax({
-          url: 'http://api.uptimerobot.com/getMonitors?apiKey=m775958873-595bcad2074d63b4b9765df8&format=json&customUptimeRatio=30',
+          url: 'http://api.uptimerobot.com/getMonitors?apiKey=m775958873-595bcad2074d63b4b9765df8&format=json',
           dataType: 'jsonp'
         })
 
