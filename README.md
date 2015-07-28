@@ -1,6 +1,6 @@
 [![Travis](https://travis-ci.org/hakanensari/fixer-io.svg)](https://travis-ci.org/hakanensari/fixer-io)
 
-<img src="http://fixer.io/img/money.png" alt="fixer" style="width: 180px; display: block; margin: 0 auto;">
+<img src="http://fixer.io/img/money.png" alt="fixer" width=180 align="middle">
 
 Fixer.io is a free JSON API for current and historical foreign exchange rates published by the European Central Bank.
 
