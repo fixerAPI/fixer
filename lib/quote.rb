@@ -1,25 +1,28 @@
 require 'virtus'
 require 'currency'
 
-# Quotes exchange rates on a specific date
-class Snapshot
-  include Virtus.model
+class Quote
+  include Virtus.value_object
 
-  attribute :base, String, default: 'EUR'
-  attribute :date, Date, default: Currency.current_date
+  DEFAULT_BASE = 'EUR'
 
-  def quote
-    self.date =
-      if date
-        last_date = Currency.current_date_before(date)
-        fail ArgumentError, 'Date too old' unless last_date
-        last_date
-      end
+  values do
+    attribute :base, String, default: DEFAULT_BASE
+    attribute :date, Date, default: Currency.current_date
+  end
 
+  def to_h
     attributes.merge(rates: rebase(rates))
   end
 
   private
+
+  def date=(date)
+    current_date = Currency.current_date_before(date)
+    fail ArgumentError, 'Date too old' unless current_date
+
+    super current_date
+  end
 
   def rates
     Currency.where(date: date).reduce({}) do |rates, currency|
@@ -28,8 +31,8 @@ class Snapshot
   end
 
   def rebase(rates)
-    if base.upcase! != 'EUR'
-      denominator = rates.update('EUR' => 1.0).delete(base)
+    if base.upcase! != DEFAULT_BASE
+      denominator = rates.update(DEFAULT_BASE => 1.0).delete(base)
       fail ArgumentError, 'Invalid base' unless denominator
       rates.each do |iso_code, rate|
         rates[iso_code] = round(rate / denominator)

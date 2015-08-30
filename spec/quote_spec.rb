@@ -1,16 +1,16 @@
 require_relative 'helper'
-require 'snapshot'
+require 'quote'
 
-describe Snapshot do
-  let(:snapshot) { Snapshot.new }
-
+describe Quote do
   def stub_rates(rates = {})
-    snapshot.stub :rates, rates do
-      yield snapshot.quote[:rates]
+    quote.stub :rates, rates do
+      yield quote.to_h[:rates]
     end
   end
 
   describe 'by default' do
+    let(:quote) { Quote.new }
+
     it 'quotes rates against the euro' do
       stub_rates 'USD' => 1.25 do |quotes|
         quotes['USD'].must_equal 1.25
@@ -25,9 +25,7 @@ describe Snapshot do
   end
 
   describe 'when base is set to a non-euro currency' do
-    before do
-      snapshot.base = 'USD'
-    end
+    let(:quote) { Quote.new(base: 'USD') }
 
     it 'quotes rates against that currency' do
       stub_rates 'USD' => 1.25 do |quotes|

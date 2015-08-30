@@ -2,7 +2,7 @@ require 'sinatra'
 require 'sinatra/cross_origin'
 require 'sinatra/jsonp'
 require 'yajl'
-require 'snapshot'
+require 'quote'
 
 configure do
   enable :cross_origin
@@ -17,8 +17,8 @@ configure :production do
 end
 
 helpers do
-  def snapshot
-    quotes = Snapshot.new(params).quote
+  def quote
+    quotes = Quote.new(params).to_h
 
     symbols = params.delete('symbols') || params.delete('currencies')
     if symbols
@@ -45,12 +45,12 @@ get '/' do
 end
 
 get '/latest' do
-  jsonp snapshot
+  jsonp quote
 end
 
 get(/(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/) do
   process_date
-  jsonp snapshot
+  jsonp quote
 end
 
 not_found do
