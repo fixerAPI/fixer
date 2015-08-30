@@ -36,8 +36,6 @@ GEM
       rack (>= 1.0)
     raindrops (0.13.0)
     rake (10.4.2)
-    rollbar (1.5.3)
-      multi_json (~> 1.3)
     sequel (4.22.0)
     sequel_pg (1.6.12)
       pg (>= 0.8.0)

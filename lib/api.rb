@@ -1,4 +1,3 @@
-require 'rollbar/rack'
 require 'sinatra'
 require 'sinatra/cross_origin'
 require 'sinatra/jsonp'
