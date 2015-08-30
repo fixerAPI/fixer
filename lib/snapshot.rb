@@ -6,16 +6,14 @@ class Snapshot
   include Virtus.model
 
   attribute :base, String, default: 'EUR'
-  attribute :date, Date
+  attribute :date, Date, default: Currency.current_date
 
   def quote
     self.date =
       if date
-        last_date = Currency.where("date <= '#{date}'").order(:date).last
+        last_date = Currency.current_date_before(date)
         fail ArgumentError, 'Date too old' unless last_date
-        last_date.date
-      else
-        Currency.last_date
+        last_date
       end
 
     attributes.merge(rates: rebase(rates))

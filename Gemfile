@@ -16,6 +16,7 @@ gem 'yajl-ruby'
 
 group :development do
   gem 'minitest'
+  gem 'minitest-around'
   gem 'rack-test'
   gem 'shotgun'
 end
