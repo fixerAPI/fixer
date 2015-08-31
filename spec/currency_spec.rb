@@ -28,6 +28,6 @@ describe Currency do
   end
 
   it 'casts to hash' do
-    @first.to_hash.must_be_kind_of Hash
+    @first.to_h.must_be_kind_of Hash
   end
 end

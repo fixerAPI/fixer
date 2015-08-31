@@ -18,7 +18,7 @@ class Currency < Sequel::Model
     end
   end
 
-  def to_hash
+  def to_h
     { iso_code => rate }
   end
 end
