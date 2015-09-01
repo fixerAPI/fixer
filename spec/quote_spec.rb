@@ -33,7 +33,7 @@ describe Quote do
     end
   end
 
-  describe 'when base is set to a non-euro currency' do
+  describe 'when given a non-euro base' do
     let(:quote) { Quote.new(base: 'USD') }
 
     it 'quotes rates against that currency' do
@@ -46,6 +46,26 @@ describe Quote do
     it 'does not quote the base currency' do
       stub_rates 'USD' => 1.25 do |quote|
         quote.rates.keys.wont_include 'USD'
+      end
+    end
+  end
+
+  describe 'when given an invalid base' do
+    let(:quote) { Quote.new(base: 'FOO') }
+
+    it 'fails' do
+      stub_rates 'USD' => 1.25 do |quote|
+        proc { quote.to_h }.must_raise Quote::NotValid
+      end
+    end
+  end
+
+  describe 'when given a date that is too old' do
+    let(:quote) { Quote.new(date: Date.new(1900)) }
+
+    it 'fails' do
+      Currency.stub :current_date_before, nil do
+        proc { quote }.must_raise Quote::NotValid
       end
     end
   end
