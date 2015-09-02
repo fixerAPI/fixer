@@ -33,19 +33,25 @@ describe Quote do
     end
   end
 
-  describe 'when given a non-euro base' do
-    let(:quote) { Quote.new(base: 'USD') }
+  describe 'when given a custom base' do
+    let(:quote) { Quote.new(base: 'FOO') }
 
     it 'quotes rates against that currency' do
-      stub_rates 'USD' => 1.25 do |quote|
-        rate = quote.rates['EUR']
-        rate.must_equal 0.8
+      stub_rates 'FOO' => 2 do |quote|
+        quote.rates.keys.must_include 'EUR'
       end
     end
 
     it 'does not quote the base currency' do
-      stub_rates 'USD' => 1.25 do |quote|
-        quote.rates.keys.wont_include 'USD'
+      stub_rates 'FOO' => 2 do |quote|
+        quote.rates.keys.wont_include 'FOO'
+      end
+    end
+
+    it 'rounds to five significant digits' do
+      stub_rates 'FOO' => 0.6995 do |quote|
+        rate = quote.rates['EUR']
+        rate.must_equal 1.4296
       end
     end
   end
