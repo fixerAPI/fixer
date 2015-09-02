@@ -54,9 +54,7 @@ describe Quote do
     let(:quote) { Quote.new(base: 'FOO') }
 
     it 'fails' do
-      stub_rates 'USD' => 1.25 do |quote|
-        proc { quote.to_h }.must_raise Quote::NotValid
-      end
+      proc { quote.to_h }.must_raise ArgumentError
     end
   end
 
@@ -65,7 +63,7 @@ describe Quote do
 
     it 'fails' do
       Currency.stub :current_date_before, nil do
-        proc { quote }.must_raise Quote::NotValid
+        proc { quote }.must_raise ArgumentError
       end
     end
   end

@@ -4,8 +4,6 @@ require 'currency'
 class Quote
   include Virtus.value_object
 
-  NotValid = Class.new(ArgumentError)
-
   DEFAULT_BASE = 'EUR'
 
   values do
@@ -32,7 +30,7 @@ class Quote
 
   def date=(date)
     current_date = Currency.current_date_before(date)
-    fail NotValid, 'Date too old' unless current_date
+    fail ArgumentError, 'Date too old' unless current_date
 
     super current_date
   end
@@ -54,7 +52,7 @@ class Quote
   def find_rebased_rates
     rates = find_default_rates
     denominator = rates.update(DEFAULT_BASE => 1.0).delete(base)
-    fail NotValid, 'Invalid base' unless denominator
+    fail ArgumentError, 'Invalid base' unless denominator
     rates.each do |iso_code, rate|
       rates[iso_code] = round_rate(rate / denominator)
     end

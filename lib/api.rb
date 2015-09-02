@@ -57,6 +57,6 @@ not_found do
   halt_with_message 404, 'Not found'
 end
 
-error Quote::Invalid do
+error ArgumentError do
   halt_with_message 422, env['sinatra.error'].message.capitalize
 end
