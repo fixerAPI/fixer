@@ -62,10 +62,6 @@ class Quote
 
   # I'm mimicking the apparent convention of the ECB here.
   def round_rate(rate)
-    if rate > 100
-      rate.round(2)
-    else
-      Float("%.#{5}g" % rate)
-    end
+    Float("%.#{5}g" % rate)
   end
 end
