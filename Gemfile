@@ -4,7 +4,6 @@ ruby '2.2.3'
 
 gem 'fixer'
 gem 'newrelic_rpm'
-gem 'pry'
 gem 'rake'
 gem 'sequel_pg'
 gem 'sinatra-jsonp'
