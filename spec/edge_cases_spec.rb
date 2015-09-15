@@ -6,6 +6,7 @@ describe 'the API' do
   include Rack::Test::Methods
 
   let(:app)  { Sinatra::Application }
+  let(:json) { Yajl::Parser.new.parse last_response.body }
 
   it 'handles unfound pages' do
     get '/foo'
@@ -30,5 +31,15 @@ describe 'the API' do
   it 'handles malformed queries' do
     get '/latest?base=USD?callback=?'
     last_response.must_be :unprocessable?
+  end
+
+  it 'returns fresh dates' do
+    Currency.db.transaction do
+      new_date = Currency.current_date + 1
+      Currency.create(date: new_date, iso_code: 'FOO', rate: 1)
+      get '/latest'
+      json['date'].must_equal new_date.to_s
+      raise Sequel::Rollback
+    end
   end
 end

@@ -8,7 +8,7 @@ class Quote
 
   values do
     attribute :base, String, default: DEFAULT_BASE
-    attribute :date, Date, default: Currency.current_date
+    attribute :date, Date, default: proc { Currency.current_date }
   end
 
   def rates
