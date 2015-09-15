@@ -18,20 +18,28 @@ end
 
 helpers do
   def quote
-    quotes = Quote.new(params).to_h
+    @quote ||= begin
+      ret = Quote.new(params).to_h
+      ret[:rates].keep_if { |k, _| symbols.include?(k) } if symbols
 
-    symbols = params.delete('symbols') || params.delete('currencies')
-    if symbols
-      symbols = symbols.split(',')
-      quotes[:rates].keep_if { |k, _| symbols.include?(k) }
+      ret
     end
-
-    quotes
   end
 
-  def process_date
+  def symbols
+    return @symbols if defined?(@symbols)
+
+    @symbols = begin
+      ret = params.delete('symbols') || params.delete('currencies')
+      ret.split(',') if ret
+    end
+  end
+
+  def transform_date
     params[:date] = Date.new(
-      params[:year].to_i, params[:month].to_i, params[:day].to_i
+      params.delete('year').to_i,
+      params.delete('month').to_i,
+      params.delete('day').to_i
     )
   end
 
@@ -49,7 +57,7 @@ get '/latest' do
 end
 
 get(/(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/) do
-  process_date
+  transform_date
   jsonp quote
 end
 
