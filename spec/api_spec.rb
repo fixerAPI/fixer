@@ -40,6 +40,16 @@ describe 'the API' do
     json['rates'].wont_be :empty?
   end
 
+  it 'returns a last modified header for latest quote' do
+    get '/latest'
+    headers['Last-Modified'].wont_be_nil
+  end
+
+  it 'returns a last modified header for historical quote' do
+    get '/2012-11-20'
+    headers['Last-Modified'].wont_be_nil
+  end
+
   it 'allows cross-origin requests' do
     get '/', {}, 'HTTP_ORIGIN' => 'http://localhost'
     assert_equal 'http://localhost', headers['Access-Control-Allow-Origin']

@@ -53,11 +53,14 @@ get '/' do
 end
 
 get '/latest' do
+  last_modified quote[:date]
   jsonp quote
 end
 
 get(/(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/) do
   transform_date
+  last_modified quote[:date]
+
   jsonp quote
 end
 
