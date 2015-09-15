@@ -28,7 +28,7 @@ describe 'the API' do
   end
 
   it 'handles malformed queries' do
-    get 'latest?base=USD?callback=?'
+    get '/latest?base=USD?callback=?'
     last_response.must_be :unprocessable?
   end
 end
