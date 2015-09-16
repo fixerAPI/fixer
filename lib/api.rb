@@ -19,7 +19,7 @@ end
 helpers do
   def quote
     @quote ||= begin
-      ret = Quote.new(params).to_h
+      ret = Quote.new(params).attributes
       ret[:rates].keep_if { |k, _| symbols.include?(k) } if symbols
 
       ret

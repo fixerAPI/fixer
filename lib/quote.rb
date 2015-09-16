@@ -19,8 +19,6 @@ class Quote
     super.merge(rates: rates)
   end
 
-  alias_method :to_h, :attributes
-
   private
 
   def base=(base)
