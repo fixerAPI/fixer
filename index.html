@@ -150,14 +150,22 @@
         </p>
 
         <!--googleoff: all-->
-        <code class="js">var demo = function(data) {
-    fx.rates = data.rates
-    var rate = fx(1).from("GBP").to("USD")
-    var rounded = Math.round(rate * 100) / 100
-    alert("£1.00 = $" + rounded)
+        <code class="js">var demo = function() {
+  var rate = fx(1).from("GBP").to("USD")
+  alert("£1 = $" + rate.toFixed(4))
 }
 
-$.getJSON("http://api.fixer.io/latest", demo)
+var req = new XMLHttpRequest()
+req.onreadystatechange = function() {
+  if (req.readyState == 4) {
+    var data = JSON.parse(req.responseText)
+    fx.rates = data.rates
+    demo()
+  }
+}
+
+req.open("GET", "http://api.fixer.io/latest")
+req.send()
 </code>
         <!--googleon: all-->
 
@@ -175,7 +183,7 @@ $.getJSON("http://api.fixer.io/latest", demo)
             We monitor the uptime of the API with <a href="http://uptimerobot.com">UptimeRobot</a>.
           </li>
           <li>
-            While up and running since 2012, the API comes with no warranty.
+            The API comes with no warranty.
           </li>
         </ol>
       </section>
