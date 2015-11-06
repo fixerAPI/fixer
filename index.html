@@ -15,7 +15,8 @@
       body {
         font: 15px/1.5 'Open Sans', sans-serif;
       }
-      body, a {
+      body,
+      a {
         color: #282828;
       }
       .wrapper {
@@ -36,18 +37,37 @@
       }
       header img {
         display: block;
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
         max-width: 150px;
+      }
+      .status {
+        border-spacing: 0;
+        margin: 10px auto;
+        text-align: center;
+        width: 80%;
+      }
+      .status th:not(:last-child),
+      .status td:not(:last-child) {
+        border-right: 1px solid #d8d8d8;
+      }
+      .status th {
+        color: #ddd;
+        font-weight: normal;
+      }
+      .status td {
+        font-size: 19px;
       }
       h3, p {
         padding-bottom: 1em;
       }
       h3 {
+        font-size: 19px;
         padding-top: 1em;
       }
       code {
         background: #fff;
-        border: 1px solid #aaa;
+        border: 1px solid #d8d8d8;
         display: block;
         font-size: 11px;
         margin-bottom: 2em;
@@ -90,7 +110,41 @@
         <img alt="logo" src="img/money.png">
       </header>
 
+      <!--googleoff: all-->
+      <table class="status">
+        <thead>
+          <tr>
+            <th>
+              Availability
+            </th>
+            <th>
+              Throughput
+            </th>
+            <th>
+              Response time
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="uptime">
+              —
+            </td>
+            <td class="throughput">
+              —
+            </td>
+            <td class="responsetime">
+              —
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!--googleon: all-->
+
       <section>
+
+        <h3>Summary</h3>
+
         <p>
           Fixer.io is a free JSON API for current and historical foreign exchange rates published by the European Central Bank.
         </p>
@@ -179,15 +233,6 @@ req.send()
           <li>
             The data source is available on <a href="http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html" target="_blank">ECB</a>.
           </li>
-          <li class="uptime">
-            We monitor the uptime of the API with <a href="http://uptimerobot.com">UptimeRobot</a>.
-          </li>
-          <li class="response-time">
-            We monitor the response time of the API with <a href="http://newrelic.com">New Relic</a>.
-          </li>
-          <li class="throughput">
-            We monitor the throughput of the API with <a href="http://newrelic.com">New Relic</a>.
-          </li>
           <li>
             The API comes with no warranty.
           </li>
@@ -247,19 +292,14 @@ req.send()
 
         jsonUptimeRobotApi = function(data) {
           var monitor = data.monitors.monitor[0]
-          var ratio = Number(monitor.alltimeuptimeratio).toFixed(2)
-          var message = 'The all time uptime ratio is <a href="' + uptimeRobotUrl + '" target="_blank">' + ratio + '%</a>.'
-          $('.uptime').html(message)
+          $('.uptime').html(Number(monitor.alltimeuptimeratio).toFixed(2) + '%')
         }
         $.ajax({ url: uptimeRobotUrl, dataType: 'jsonp' })
 
         // Fill in application metrics
         $.getJSON('http://newrelic-proxy.fixer.io?callback=?', function(data) {
-          console.log(data)
-          var message = 'The current response time is ' + data.response_time + 'ms.'
-          $('.response-time').html(message)
-          var message = 'The current throughput is ' + data.throughput + 'rpm.'
-          $('.throughput').html(message)
+          $('.responsetime').html(data.response_time + 'ms')
+          $('.throughput').html(data.throughput + 'rpm')
         })
 
         // Google Analytics events
