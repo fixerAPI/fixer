@@ -182,6 +182,12 @@ req.send()
           <li class="uptime">
             We monitor the uptime of the API with <a href="http://uptimerobot.com">UptimeRobot</a>.
           </li>
+          <li class="response-time">
+            We monitor the response time of the API with <a href="http://newrelic.com">New Relic</a>.
+          </li>
+          <li class="throughput">
+            We monitor the throughput of the API with <a href="http://newrelic.com">New Relic</a>.
+          </li>
           <li>
             The API comes with no warranty.
           </li>
@@ -236,16 +242,25 @@ req.send()
           })
         })
 
-        // Fill in Uptime Ratio
+        // Fill in uptime ratio
         var uptimeRobotUrl = 'http://api.uptimerobot.com/getMonitors?apiKey=m775958873-595bcad2074d63b4b9765df8&format=json'
 
         jsonUptimeRobotApi = function(data) {
           var monitor = data.monitors.monitor[0]
           var ratio = Number(monitor.alltimeuptimeratio).toFixed(2)
-          var message = 'The all time uptime ratio of the API is <a href="' + uptimeRobotUrl + '" target="_blank">' + ratio + '%</a>.'
+          var message = 'The all time uptime ratio is <a href="' + uptimeRobotUrl + '" target="_blank">' + ratio + '%</a>.'
           $('.uptime').html(message)
         }
         $.ajax({ url: uptimeRobotUrl, dataType: 'jsonp' })
+
+        // Fill in application metrics
+        $.getJSON('http://newrelic-proxy.fixer.io?callback=?', function(data) {
+          console.log(data)
+          var message = 'The current response time is ' + data.response_time + 'ms.'
+          $('.response-time').html(message)
+          var message = 'The current throughput is ' + data.throughput + 'rpm.'
+          $('.throughput').html(message)
+        })
 
         // Google Analytics events
         $('.referral').click(function() {
