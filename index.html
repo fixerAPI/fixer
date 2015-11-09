@@ -295,10 +295,14 @@ req.send()
         $.ajax({ url: uptimeRobotUrl, dataType: 'jsonp' })
 
         // Fill in application metrics
-        $.getJSON('http://newrelic-proxy.fixer.io?callback=?', function(data) {
-          $('.responsetime').html(data.response_time + 'ms')
-          $('.throughput').html(data.throughput + 'rpm')
-        })
+        var addMetrics = function() {
+          $.getJSON('http://newrelic-proxy.fixer.io?callback=?', function(data) {
+            $('.responsetime').html(data.response_time + 'ms')
+            $('.throughput').html(data.throughput + 'rpm')
+          })
+        }
+        addMetrics()
+        setInterval(addMetrics, 5000)
 
         // Google Analytics events
         $('.referral').click(function() {
