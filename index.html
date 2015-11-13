@@ -203,22 +203,15 @@
         </p>
 
         <!--googleoff: all-->
-        <code class="js">var demo = function() {
+        <code class="js">var demo = function(data) {
   var rate = fx(1).from("GBP").to("USD")
   alert("£1 = $" + rate.toFixed(4))
 }
 
-var req = new XMLHttpRequest()
-req.onreadystatechange = function() {
-  if (req.readyState == 4) {
-    var data = JSON.parse(req.responseText)
-    fx.rates = data.rates
-    demo()
-  }
-}
-
-req.open("GET", "http://api.fixer.io/latest")
-req.send()
+$.getJSON("http://api.fixer.io/latest", function(data) {
+  fx.rates = data.rates
+  demo()
+})
 </code>
         <!--googleon: all-->
 
@@ -265,11 +258,8 @@ req.send()
             if ($pre.length) {
               $pre.remove()
             } else {
-              $.ajax({
-                url: url,
-                success: function(data) {
-                  $this.append('<pre>' + JSON.stringify(data, undefined, 4) + '</pre>')
-                }
+              $.getJSON(url, function(data) {
+                $this.append('<pre>' + JSON.stringify(data, undefined, 4) + '</pre>')
               })
             }
           })
@@ -279,7 +269,7 @@ req.send()
         $('code.js').each(function() {
           var $this = $(this)
 
-          $this.on('click', function(e) {
+          $this.click(function() {
             new Function(
               $this.html()
             )()
