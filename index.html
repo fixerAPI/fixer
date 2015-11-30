@@ -204,14 +204,12 @@
 
         <!--googleoff: all-->
         <code class="js">var demo = function(data) {
+  fx.rates = data.rates
   var rate = fx(1).from("GBP").to("USD")
   alert("£1 = $" + rate.toFixed(4))
 }
 
-$.getJSON("http://api.fixer.io/latest", function(data) {
-  fx.rates = data.rates
-  demo()
-})
+$.getJSON("http://api.fixer.io/latest", demo)
 </code>
         <!--googleon: all-->
 
@@ -277,11 +275,11 @@ $.getJSON("http://api.fixer.io/latest", function(data) {
         })
 
         // Fill in uptime ratio
-        var uptimeRobotUrl = 'http://api.uptimerobot.com/getMonitors?apiKey=m775958873-595bcad2074d63b4b9765df8&format=json'
+        var uptimeRobotUrl = 'http://api.uptimerobot.com/getMonitors?apiKey=m775958873-595bcad2074d63b4b9765df8&customUptimeRatio=30&format=json'
 
         jsonUptimeRobotApi = function(data) {
           var monitor = data.monitors.monitor[0]
-          $('.uptime').html(Number(monitor.alltimeuptimeratio).toFixed(2) + '%')
+          $('.uptime').html(Number(monitor.customuptimeratio).toFixed(2) + '%')
         }
         $.ajax({ url: uptimeRobotUrl, dataType: 'jsonp' })
 
