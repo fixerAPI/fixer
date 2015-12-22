@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-ruby '2.2.3'
+ruby '2.2.4'
 
 gem 'fixer'
 gem 'newrelic_rpm'
