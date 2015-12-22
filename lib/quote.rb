@@ -9,14 +9,7 @@ class Quote
   values do
     attribute :base, String, default: DEFAULT_BASE
     attribute :date, Date, default: proc { Currency.current_date }
-  end
-
-  def rates
-    @rates ||= find_rates
-  end
-
-  def attributes
-    super.merge(rates: rates)
+    attribute :rates, Hash, default: :find_rates, lazy: true
   end
 
   private
