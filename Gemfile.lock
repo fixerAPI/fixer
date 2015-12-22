@@ -14,18 +14,18 @@ GEM
     fixer (0.5.0)
       nokogiri (~> 1.5)
     ice_nine (0.11.1)
-    kgio (2.9.3)
+    kgio (2.10.0)
     method_source (0.8.2)
-    mini_portile (0.6.2)
-    minitest (5.8.0)
+    mini_portile2 (2.0.0)
+    minitest (5.8.3)
     minitest-around (0.3.2)
       minitest (~> 5.0)
     multi_json (1.11.2)
-    newrelic_rpm (3.13.0.299)
-    nokogiri (1.6.6.2)
-      mini_portile (~> 0.6.0)
-    pg (0.18.2)
-    pry (0.10.1)
+    newrelic_rpm (3.14.1.311)
+    nokogiri (1.6.7.1)
+      mini_portile2 (~> 2.0.0.rc2)
+    pg (0.18.4)
+    pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
@@ -36,7 +36,7 @@ GEM
       rack (>= 1.0)
     raindrops (0.15.0)
     rake (10.4.2)
-    sequel (4.26.0)
+    sequel (4.29.0)
     sequel_pg (1.6.13)
       pg (>= 0.8.0)
       sequel (>= 3.39.0)
@@ -53,7 +53,7 @@ GEM
     slop (3.6.0)
     thread_safe (0.3.5)
     tilt (2.0.1)
-    unicorn (4.9.0)
+    unicorn (5.0.1)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -84,4 +84,4 @@ DEPENDENCIES
   yajl-ruby
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
