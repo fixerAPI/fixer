@@ -1,5 +1,5 @@
 before_script:
   - psql -c 'create database fixer_test;' -U postgres
 rvm:
-  - 2.2.4
+  - 2.3.0
 sudo: false
