@@ -6,6 +6,7 @@ def run(cmd)
 end
 
 run "foreman run bundle install --deployment --without development:test"
+run "whenever --update-crontab"
 
 tasks = []
 num_migrations = `git diff #{oldrev} #{newrev} --diff-filter=A --name-only -z db/migrate`.split("\0").size
