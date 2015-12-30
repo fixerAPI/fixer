@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-sudo restart fixer 2>/dev/null || sudo start fixer
+sudo restart api.fixer.io 2>/dev/null || sudo start api.fixer.io
