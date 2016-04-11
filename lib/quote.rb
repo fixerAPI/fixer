@@ -6,7 +6,7 @@ require 'currency'
 class Quote
   include Virtus.value_object
 
-  DEFAULT_BASE = 'EUR'
+  DEFAULT_BASE = 'EUR'.freeze
 
   values do
     attribute :base, String, default: DEFAULT_BASE
@@ -53,8 +53,8 @@ class Quote
     rates
   end
 
-  # I'm mimicking the apparent convention of the ECB here.
+  # I'm mimicking the apparent convention of the ECB here.
   def round_rate(rate)
-    Float("%.#{5}g" % rate)
+    Float(format('%.5g', rate))
   end
 end
