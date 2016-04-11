@@ -59,18 +59,26 @@ describe Quote do
   describe 'when given an invalid base' do
     let(:quote) { Quote.new(base: 'FOO') }
 
-    it 'fails' do
-      proc { quote.to_h }.must_raise ArgumentError
+    it 'raises validation error' do
+      proc { quote.to_h }.must_raise Quote::Invalid
     end
   end
 
   describe 'when given a date that is too old' do
-    let(:quote) { Quote.new(date: Date.new(1900)) }
+    let(:quote) { Quote.new(date: '1900-01-01') }
 
-    it 'fails' do
+    it 'raises validation error' do
       Currency.stub :current_date_before, nil do
-        proc { quote }.must_raise ArgumentError
+        proc { quote }.must_raise Quote::Invalid
       end
+    end
+  end
+
+  describe 'when given a bad date' do
+    let(:quote) { Quote.new(date: '2000-31-01') }
+
+    it 'raises validation error' do
+      proc { quote }.must_raise Quote::Invalid
     end
   end
 end

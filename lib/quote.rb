@@ -6,6 +6,8 @@ require 'currency'
 class Quote
   include Virtus.value_object
 
+  Invalid = Class.new(StandardError)
+
   DEFAULT_BASE = 'EUR'.freeze
 
   values do
@@ -23,9 +25,14 @@ class Quote
 
   def date=(date)
     current_date = Currency.current_date_before(date)
-    fail ArgumentError, 'Date too old' unless current_date
-
+    raise Invalid, 'Date too old' unless current_date
     super current_date
+  rescue Sequel::DatabaseError => ex
+    if ex.wrapped_exception.is_a?(PG::DatetimeFieldOverflow)
+      raise Invalid, 'Invalid date'
+    else
+      raise
+    end
   end
 
   def find_rates
@@ -45,7 +52,7 @@ class Quote
   def find_rebased_rates
     rates = find_default_rates
     denominator = rates.update(DEFAULT_BASE => 1.0).delete(base)
-    fail ArgumentError, 'Invalid base' unless denominator
+    raise Invalid, 'Invalid base' unless denominator
     rates.each do |iso_code, rate|
       rates[iso_code] = round_rate(rate / denominator)
     end

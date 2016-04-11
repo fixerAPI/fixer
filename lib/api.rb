@@ -26,6 +26,8 @@ helpers do
 
       ret
     end
+  rescue Quote::Invalid => ex
+    halt_with_message 422, ex.message
   end
 
   def symbols
@@ -35,14 +37,6 @@ helpers do
       ret = params.delete('symbols') || params.delete('currencies')
       ret.split(',') if ret
     end
-  end
-
-  def transform_date
-    params[:date] = Date.new(
-      params.delete('year').to_i,
-      params.delete('month').to_i,
-      params.delete('day').to_i
-    )
   end
 
   def halt_with_message(status, message)
@@ -59,17 +53,11 @@ get '/latest' do
   jsonp quote
 end
 
-get(/(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/) do
-  transform_date
+get(/(?<date>\d{4}-\d{2}-\d{2})/) do
   last_modified quote[:date]
-
   jsonp quote
 end
 
 not_found do
   halt_with_message 404, 'Not found'
-end
-
-error ArgumentError do
-  halt_with_message 422, env['sinatra.error'].message.capitalize
 end
