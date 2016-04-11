@@ -6,9 +6,11 @@ namespace :rates do
 
   desc 'Load all rates'
   task load: :setup do
-    Currency.dataset.delete
-    data = Fixer::Feed.new(:historical)
-    Currency.multi_insert(data.to_a)
+    Currency.db.transaction do
+      Currency.dataset.delete
+      data = Fixer::Feed.new(:historical)
+      Currency.multi_insert(data.to_a)
+    end
   end
 
   desc 'Update rates'
