@@ -11,7 +11,6 @@ gem 'sequel_pg'
 gem 'sinatra-jsonp'
 gem 'sinatra-cross_origin'
 gem 'unicorn'
-gem 'virtus'
 gem 'yajl-ruby'
 
 group :development do

@@ -3,19 +3,9 @@ GEM
   specs:
     ansi (1.5.0)
     ast (2.2.0)
-    axiom-types (0.1.1)
-      descendants_tracker (~> 0.0.4)
-      ice_nine (~> 0.11.0)
-      thread_safe (~> 0.3, >= 0.3.1)
     coderay (1.1.1)
-    coercible (1.0.0)
-      descendants_tracker (~> 0.0.1)
-    descendants_tracker (0.0.4)
-      thread_safe (~> 0.3, >= 0.3.1)
-    equalizer (0.0.11)
     fixer (0.6.0)
       oga (~> 2.0)
-    ice_nine (0.11.2)
     kgio (2.10.0)
     method_source (0.8.2)
     minitest (5.8.4)
@@ -56,16 +46,10 @@ GEM
       multi_json (~> 1.8)
       sinatra (~> 1.0)
     slop (3.6.0)
-    thread_safe (0.3.5)
     tilt (2.0.2)
     unicorn (5.1.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
-    virtus (1.0.5)
-      axiom-types (~> 0.1)
-      coercible (~> 1.0)
-      descendants_tracker (~> 0.0, >= 0.0.3)
-      equalizer (~> 0.0, >= 0.0.9)
     yajl-ruby (1.2.1)
 
 PLATFORMS
@@ -84,7 +68,6 @@ DEPENDENCIES
   sinatra-cross_origin
   sinatra-jsonp
   unicorn
-  virtus
   yajl-ruby
 
 BUNDLED WITH

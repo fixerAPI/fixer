@@ -1,32 +1,39 @@
 # frozen_string_literal: true
 
-require 'virtus'
 require 'currency'
 
 class Quote
-  include Virtus.value_object
-
   Invalid = Class.new(StandardError)
 
-  DEFAULT_BASE = 'EUR'.freeze
+  DEFAULT_BASE = 'EUR'
 
-  values do
-    attribute :base, String, default: DEFAULT_BASE
-    attribute :date, Date, default: proc { Currency.current_date }
-    attribute :rates, Hash, default: :find_rates, lazy: true
+  attr_reader :base, :date
+
+  def initialize(params = {})
+    self.base = params[:base]
+    self.date = params[:date]
   end
+
+  def rates
+    @rates ||= find_rates
+  end
+
+  def attributes
+    { base: base, date: date, rates: rates }
+  end
+
+  alias to_h attributes
 
   private
 
   def base=(base)
-    base.upcase!
-    super base
+    @base = base ? base.upcase : DEFAULT_BASE
   end
 
   def date=(date)
-    current_date = Currency.current_date_before(date)
+    current_date = date ? Currency.current_date_before(date) : Currency.current_date
     raise Invalid, 'Date too old' unless current_date
-    super current_date
+    @date = current_date
   rescue Sequel::DatabaseError => ex
     if ex.wrapped_exception.is_a?(PG::DatetimeFieldOverflow)
       raise Invalid, 'Invalid date'
