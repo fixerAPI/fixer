@@ -1,2 +1,4 @@
+AllCops:
+  TargetRubyVersion: 2.3
 Documentation:
   Enabled: false
