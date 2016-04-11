@@ -11,6 +11,6 @@ run 'whenever --update-crontab'
 tasks = []
 num_migrations = `git diff #{oldrev} #{newrev} --diff-filter=A --name-only -z db/migrate`.split("\0").size
 tasks << 'db:migrate' if num_migrations > 0
-tasks << 'rates:update'
+tasks << 'rates:load'
 
-run "foreman run bundle exec rake #{tasks.join(" ")}" if tasks.any?
+run "foreman run bundle exec rake #{tasks.join(' ')}"
