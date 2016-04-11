@@ -1,20 +1,17 @@
 version: '2'
 services:
-  postgres:
+  db:
     image: postgres
     ports:
       - 5432:5432
-    environment:
-      - POSTGRES_DB=fixer
-  fixer:
+  web:
     build: .
-    command: bundle exec unicorn -p 8080 -c /fixer-io/config/unicorn.rb
     volumes:
-      - .:/fixer-io
+      - .:/app
     ports:
       - 8080:8080
     environment:
       - RACK_ENV=production
-      - DATABASE_URL=postgres://postgres:mysecretpassword@postgres/fixer
-    depends_on:
-      - postgres
+      - DATABASE_URL=postgres://postgres@db/postgres
+    links:
+      - db
