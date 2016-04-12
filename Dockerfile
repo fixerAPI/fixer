@@ -6,4 +6,4 @@ ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
 RUN bundle install --without development test
 ADD . /app
-CMD bundle exec unicorn -c /app/config/unicorn.rb
+CMD ./wait-for-it.sh db:5432 -- unicorn -c /app/config/unicorn.rb

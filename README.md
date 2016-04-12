@@ -61,6 +61,8 @@ $.getJSON("http://api.fixer.io/latest", demo)
 
 ## Docker
 
+You can run a local instance of the app using Docker.
+
 Bring the stack up.
 
 ```bash
@@ -71,4 +73,5 @@ Initialize the database and seed data.
 
 ```bash
 docker-compose run web rake db:migrate rates:load
+docker-compose restart web
 ```
