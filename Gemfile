@@ -9,7 +9,6 @@ gem 'newrelic_rpm'
 gem 'rake'
 gem 'sequel_pg'
 gem 'sinatra-jsonp'
-gem 'sinatra-cross_origin'
 gem 'unicorn'
 gem 'yajl-ruby'
 

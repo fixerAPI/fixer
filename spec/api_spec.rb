@@ -53,7 +53,9 @@ describe 'the API' do
   end
 
   it 'allows cross-origin requests' do
-    get '/', {}, 'HTTP_ORIGIN' => 'http://localhost'
-    assert_equal 'http://localhost', headers['Access-Control-Allow-Origin']
+    %w(/ /latest /2012-11-20).each do |path|
+      get path
+      assert_equal '*', headers['Access-Control-Allow-Origin']
+    end
   end
 end

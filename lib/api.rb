@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'sinatra'
-require 'sinatra/cross_origin'
 require 'sinatra/jsonp'
 require 'yajl'
 require 'quote'
@@ -42,6 +41,10 @@ helpers do
   def halt_with_message(status, message)
     halt status, Yajl::Encoder.encode(error: message)
   end
+end
+
+before do
+  headers 'Access-Control-Allow-Origin' => '*'
 end
 
 get '/' do

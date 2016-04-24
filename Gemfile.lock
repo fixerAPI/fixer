@@ -41,7 +41,6 @@ GEM
       rack (~> 1.5)
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
-    sinatra-cross_origin (0.3.2)
     sinatra-jsonp (0.4.4)
       multi_json (~> 1.8)
       sinatra (~> 1.0)
@@ -65,7 +64,6 @@ DEPENDENCIES
   rake
   sequel_pg
   shotgun
-  sinatra-cross_origin
   sinatra-jsonp
   unicorn
   yajl-ruby
