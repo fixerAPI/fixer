@@ -8,9 +8,8 @@ gem 'fixer'
 gem 'newrelic_rpm'
 gem 'rake'
 gem 'sequel_pg'
-gem 'sinatra-jsonp'
+gem 'sinatra'
 gem 'unicorn'
-gem 'yajl-ruby'
 
 group :development do
   gem 'minitest'

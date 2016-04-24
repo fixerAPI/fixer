@@ -8,7 +8,7 @@ describe 'the API' do
   include Rack::Test::Methods
 
   let(:app)  { Sinatra::Application }
-  let(:json) { Yajl::Parser.new.parse last_response.body }
+  let(:json) { JSON.parse last_response.body }
   let(:headers) { last_response.headers }
 
   it 'describes itself' do
@@ -42,14 +42,11 @@ describe 'the API' do
     json['rates'].wont_be :empty?
   end
 
-  it 'returns a last modified header for latest quote' do
-    get '/latest'
-    headers['Last-Modified'].wont_be_nil
-  end
-
-  it 'returns a last modified header for historical quote' do
-    get '/2012-11-20'
-    headers['Last-Modified'].wont_be_nil
+  it 'returns a last modified header' do
+    %w(/ /latest /2012-11-20).each do |path|
+      get path
+      headers['Last-Modified'].wont_be_nil
+    end
   end
 
   it 'allows cross-origin requests' do

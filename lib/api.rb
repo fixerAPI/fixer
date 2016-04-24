@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
+require 'json'
 require 'sinatra'
-require 'sinatra/jsonp'
-require 'yajl'
 require 'quote'
 
 configure do
@@ -30,26 +29,31 @@ end
 helpers do
   def quote
     @quote ||= begin
-      ret = Quote.new(params).attributes
-      ret[:rates].keep_if { |k, _| symbols.include?(k) } if symbols
-
-      ret
+      Quote.new(params).attributes.tap do |quote|
+        quote[:rates].keep_if { |k, _| symbols.include?(k) } if symbols
+      end
     end
   rescue Quote::Invalid => ex
-    halt_with_message 422, ex.message
+    halt 422, JSON.generate(error: ex.message)
   end
 
   def symbols
-    return @symbols if defined?(@symbols)
-
-    @symbols = begin
-      ret = params.delete('symbols') || params.delete('currencies')
-      ret.split(',') if ret
+    @symbols ||= begin
+      params.values_at('symbols', 'currencies').first.tap do |symbols|
+        symbols.split(',') if symbols
+      end
     end
   end
 
-  def halt_with_message(status, message)
-    halt status, Yajl::Encoder.encode(error: message)
+  def jsonp(data)
+    callback = params.delete('callback')
+    if callback
+      content_type :js
+      "#{callback}(#{JSON.generate(data)})"
+    else
+      content_type :json
+      JSON.generate(data)
+    end
   end
 
   def enable_cross_origin
@@ -65,6 +69,7 @@ end
 
 get '/' do
   enable_cross_origin
+  last_modified App.released_at
   jsonp details: 'http://fixer.io', version: App.version
 end
 
@@ -81,5 +86,5 @@ get(/(?<date>\d{4}-\d{2}-\d{2})/) do
 end
 
 not_found do
-  halt_with_message 404, 'Not found'
+  halt 404, JSON.generate(error: 'Not found')
 end
