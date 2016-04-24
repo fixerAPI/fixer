@@ -6,7 +6,17 @@ require 'yajl'
 require 'quote'
 
 configure do
-  enable :cross_origin
+  set :options_response_headers,
+      'Allow'                            => 'HEAD, GET, OPTIONS',
+      'Access-Control-Allow-Headers'     => 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept'
+
+  set :cors_response_headers,
+      'Access-Control-Allow-Credentials' => 'true',
+      'Access-Control-Allow-Headers'     => '*, Content-Type, Accept, AUTHORIZATION, Cache-Control',
+      'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS',
+      'Access-Control-Allow-Origin'      => '*',
+      'Access-Control-Expose-Headers'    => 'Cache-Control, Content-Language, Content-Type, Expires, Last-Modified, Pragma',
+      'Access-Control-Max-Age'           => '1728000'
 end
 
 configure :development do
@@ -41,22 +51,31 @@ helpers do
   def halt_with_message(status, message)
     halt status, Yajl::Encoder.encode(error: message)
   end
+
+  def enable_cross_origin
+    headers settings.cors_response_headers
+  end
 end
 
-before do
-  headers 'Access-Control-Allow-Origin' => '*'
+# https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Preflighted_requests
+options '*' do
+  headers settings.options_response_headers
+  pass
 end
 
 get '/' do
+  enable_cross_origin
   jsonp details: 'http://fixer.io', version: App.version
 end
 
 get '/latest' do
+  enable_cross_origin
   last_modified quote[:date]
   jsonp quote
 end
 
 get(/(?<date>\d{4}-\d{2}-\d{2})/) do
+  enable_cross_origin
   last_modified quote[:date]
   jsonp quote
 end
