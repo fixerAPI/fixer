@@ -61,5 +61,6 @@ describe 'the API' do
     options '/'
     refute_empty headers['Allow']
     refute_empty headers['Access-Control-Allow-Headers']
+    last_response.must_be :ok?
   end
 end

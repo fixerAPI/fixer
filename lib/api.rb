@@ -6,13 +6,13 @@ require 'quote'
 
 configure do
   set :options_response_headers,
-      'Allow'                            => 'HEAD, GET, OPTIONS',
+      'Allow'                            => 'GET, HEAD, OPTIONS',
       'Access-Control-Allow-Headers'     => 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept'
 
   set :cors_response_headers,
       'Access-Control-Allow-Credentials' => 'true',
       'Access-Control-Allow-Headers'     => '*, Content-Type, Accept, AUTHORIZATION, Cache-Control',
-      'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS',
+      'Access-Control-Allow-Methods'     => 'GET, HEAD, OPTIONS',
       'Access-Control-Allow-Origin'      => '*',
       'Access-Control-Expose-Headers'    => 'Cache-Control, Content-Language, Content-Type, Expires, Last-Modified, Pragma',
       'Access-Control-Max-Age'           => '1728000'
@@ -60,7 +60,7 @@ end
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Preflighted_requests
 options '*' do
   headers settings.options_response_headers
-  pass
+  200
 end
 
 get '/' do
