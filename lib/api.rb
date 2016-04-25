@@ -38,11 +38,7 @@ helpers do
   end
 
   def symbols
-    @symbols ||= begin
-      params.values_at('symbols', 'currencies').first.tap do |symbols|
-        symbols.split(',') if symbols
-      end
-    end
+    @symbols ||= params.values_at('symbols', 'currencies').first
   end
 
   def jsonp(data)
