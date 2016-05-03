@@ -2,7 +2,7 @@
 
 source 'http://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.3.1'
 
 gem 'fixer'
 gem 'newrelic_rpm'
