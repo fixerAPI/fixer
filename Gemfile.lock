@@ -15,6 +15,7 @@ GEM
     oga (2.2)
       ast
       ruby-ll (~> 2.1)
+    oj (2.15.0)
     pg (0.18.4)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -54,6 +55,7 @@ DEPENDENCIES
   minitest
   minitest-around
   newrelic_rpm
+  oj
   pry
   rack-test
   rake
@@ -62,5 +64,8 @@ DEPENDENCIES
   sinatra
   unicorn
 
+RUBY VERSION
+   ruby 2.3.1p112
+
 BUNDLED WITH
-   1.11.2
+   1.12.3

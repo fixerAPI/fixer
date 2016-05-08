@@ -6,6 +6,7 @@ ruby '2.3.1'
 
 gem 'fixer'
 gem 'newrelic_rpm'
+gem 'oj'
 gem 'rake'
 gem 'sequel_pg'
 gem 'sinatra'

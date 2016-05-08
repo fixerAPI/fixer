@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'json'
+require 'oj'
 require 'sinatra'
 require 'quote'
 
@@ -28,13 +28,11 @@ end
 
 helpers do
   def quote
-    @quote ||= begin
-      Quote.new(params).attributes.tap do |quote|
-        quote[:rates].keep_if { |k, _| symbols.include?(k) } if symbols
-      end
+    @quote ||= Quote.new(params).attributes.tap do |data|
+      data[:rates].keep_if { |k, _| symbols.include?(k) } if symbols
     end
   rescue Quote::Invalid => ex
-    halt 422, JSON.generate(error: ex.message)
+    halt 422, encode_json(error: ex.message)
   end
 
   def symbols
@@ -42,18 +40,23 @@ helpers do
   end
 
   def jsonp(data)
+    json = encode_json(data)
     callback = params.delete('callback')
     if callback
       content_type :js
-      "#{callback}(#{JSON.generate(data)})"
+      "#{callback}(#{json})"
     else
       content_type :json
-      JSON.generate(data)
+      json
     end
   end
 
   def enable_cross_origin
     headers settings.cors_response_headers
+  end
+
+  def encode_json(data)
+    Oj.dump(data, mode: :compat)
   end
 end
 
@@ -82,5 +85,5 @@ get(/(?<date>\d{4}-\d{2}-\d{2})/) do
 end
 
 not_found do
-  halt 404, JSON.generate(error: 'Not found')
+  halt 404, encode_json(error: 'Not found')
 end

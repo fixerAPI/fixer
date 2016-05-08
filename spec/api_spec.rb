@@ -8,7 +8,7 @@ describe 'the API' do
   include Rack::Test::Methods
 
   let(:app)  { Sinatra::Application }
-  let(:json) { JSON.parse last_response.body }
+  let(:json) { Oj.load(last_response.body) }
   let(:headers) { last_response.headers }
 
   it 'describes itself' do

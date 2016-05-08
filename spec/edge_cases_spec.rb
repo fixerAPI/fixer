@@ -6,7 +6,7 @@ describe 'the API' do
   include Rack::Test::Methods
 
   let(:app)  { Sinatra::Application }
-  let(:json) { JSON.parse last_response.body }
+  let(:json) { Oj.load(last_response.body) }
 
   it 'handles unfound pages' do
     get '/foo'
