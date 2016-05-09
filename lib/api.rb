@@ -38,10 +38,6 @@ helpers do
     end
   end
 
-  def enable_cross_origin
-    headers settings.cors_response_headers
-  end
-
   def encode_json(data)
     Oj.dump(data, mode: :compat)
   end
