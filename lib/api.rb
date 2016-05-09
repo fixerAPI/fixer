@@ -2,21 +2,8 @@
 
 require 'oj'
 require 'sinatra'
+require 'rack/cors'
 require 'quote'
-
-configure do
-  set :options_response_headers,
-      'Allow'                            => 'GET, HEAD, OPTIONS',
-      'Access-Control-Allow-Headers'     => 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept'
-
-  set :cors_response_headers,
-      'Access-Control-Allow-Credentials' => 'true',
-      'Access-Control-Allow-Headers'     => '*, Content-Type, Accept, AUTHORIZATION, Cache-Control',
-      'Access-Control-Allow-Methods'     => 'GET, HEAD, OPTIONS',
-      'Access-Control-Allow-Origin'      => '*',
-      'Access-Control-Expose-Headers'    => 'Cache-Control, Content-Language, Content-Type, Expires, Last-Modified, Pragma',
-      'Access-Control-Max-Age'           => '1728000'
-end
 
 configure :development do
   set :show_exceptions, :after_handler
@@ -60,26 +47,28 @@ helpers do
   end
 end
 
-# https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS#Preflighted_requests
+use Rack::Cors do
+  allow do
+    origins '*'
+    resource '*'
+  end
+end
+
 options '*' do
-  headers settings.options_response_headers
   200
 end
 
 get '/' do
-  enable_cross_origin
   last_modified App.released_at
   jsonp details: 'http://fixer.io', version: App.version
 end
 
 get '/latest' do
-  enable_cross_origin
   last_modified quote[:date]
   jsonp quote
 end
 
 get(/(?<date>\d{4}-\d{2}-\d{2})/) do
-  enable_cross_origin
   last_modified quote[:date]
   jsonp quote
 end

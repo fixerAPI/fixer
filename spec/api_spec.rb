@@ -51,16 +51,17 @@ describe 'the API' do
 
   it 'allows cross-origin requests' do
     %w(/ /latest /2012-11-20).each do |path|
+      header 'Origin', '*'
       get path
-      assert_equal '*', headers['Access-Control-Allow-Origin']
       refute_empty headers['Access-Control-Allow-Methods']
     end
   end
 
   it 'responds to preflight requests' do
-    options '/'
-    refute_empty headers['Allow']
-    refute_empty headers['Access-Control-Allow-Headers']
-    last_response.must_be :ok?
+    %w(/ /latest /2012-11-20).each do |path|
+      header 'Origin', '*'
+      options path
+      refute_empty headers['Access-Control-Allow-Methods']
+    end
   end
 end
