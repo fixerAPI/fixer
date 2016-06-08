@@ -53,15 +53,17 @@ describe 'the API' do
     %w(/ /latest /2012-11-20).each do |path|
       header 'Origin', '*'
       get path
-      refute_empty headers['Access-Control-Allow-Methods']
+      assert headers.key?('Access-Control-Allow-Methods')
     end
   end
 
   it 'responds to preflight requests' do
     %w(/ /latest /2012-11-20).each do |path|
       header 'Origin', '*'
+      header 'Access-Control-Request-Method', 'GET'
+      header 'Access-Control-Request-Headers', 'Content-Type'
       options path
-      refute_empty headers['Access-Control-Allow-Methods']
+      assert headers.key?('Access-Control-Allow-Methods')
     end
   end
 end

@@ -13,6 +13,13 @@ configure :production do
   require 'newrelic_rpm'
 end
 
+use Rack::Cors do |config|
+  config.allow do
+    origins '*'
+    resource '*', headers: :any, methods: :get
+  end
+end
+
 helpers do
   def quote
     @quote ||= Quote.new(params).attributes.tap do |data|
