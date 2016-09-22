@@ -35,7 +35,7 @@ class Quote
     raise Invalid, 'Date too old' unless current_date
     @date = current_date
   rescue Sequel::DatabaseError => ex
-    if ex.wrapped_exception.is_a?(PG::DatetimeFieldOverflow)
+    if ex.wrapped_exception.is_a?(PG::DataException)
       raise Invalid, 'Invalid date'
     else
       raise
