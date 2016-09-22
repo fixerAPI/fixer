@@ -4,6 +4,7 @@ require 'oj'
 require 'sinatra'
 require 'rack/cors'
 require 'quote'
+require 'converter'
 
 configure :development do
   set :show_exceptions, :after_handler
@@ -22,11 +23,17 @@ end
 
 helpers do
   def quote
-    @quote ||= Quote.new(params).attributes.tap do |data|
+    @quote ||= Quote.new(params)
+  end
+
+  def quote_attributes
+    @quote_attributes ||= quote.attributes.tap do |data|
       data[:rates].keep_if { |k, _| symbols.include?(k) } if symbols
     end
-  rescue Quote::Invalid => ex
-    halt 422, encode_json(error: ex.message)
+  end
+
+  def converter
+    @converter ||= Converter.new(params)
   end
 
   def symbols
@@ -67,15 +74,24 @@ get '/' do
 end
 
 get '/latest' do
-  last_modified quote[:date]
-  jsonp quote
+  last_modified quote_attributes[:date]
+  jsonp quote_attributes
 end
 
 get(/(?<date>\d{4}-\d{2}-\d{2})/) do
-  last_modified quote[:date]
-  jsonp quote
+  last_modified quote_attributes[:date]
+  jsonp quote_attributes
+end
+
+get '/converter' do
+  params[:base] = params[:from]
+  jsonp Hash(amount: converter.convert(quote))
 end
 
 not_found do
   halt 404, encode_json(error: 'Not found')
+end
+
+error Quote::Invalid do |ex|
+  halt 422, encode_json(error: ex.message)
 end

@@ -66,4 +66,9 @@ describe 'the API' do
       assert headers.key?('Access-Control-Allow-Methods')
     end
   end
+
+  it 'returns converted amount' do
+    get '/converter?to=USD&amount=100'
+    json['amount'].wont_be :nil?
+  end
 end
