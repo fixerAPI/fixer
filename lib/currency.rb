@@ -11,8 +11,7 @@ class Currency < Sequel::Model
     end
 
     def current_date
-      currency = recent.first
-      currency.date if currency
+      recent.first&.date
     end
 
     def current_date_before(value)

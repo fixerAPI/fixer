@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 oldrev, newrev = ARGV
 
 def run(cmd)
@@ -10,7 +12,7 @@ run 'whenever --update-crontab'
 
 tasks = []
 num_migrations = `git diff #{oldrev} #{newrev} --diff-filter=A --name-only -z db/migrate`.split("\0").size
-tasks << 'db:migrate' if num_migrations > 0
+tasks << 'db:migrate' if num_migrations.positive?
 tasks << 'rates:load'
 
 run "foreman run bundle exec rake #{tasks.join(' ')}"

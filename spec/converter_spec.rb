@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'helper'
 require 'converter'
 
@@ -29,7 +31,7 @@ describe Converter do
     end
 
     it 'should raise with invalid currency' do
-      quote.stub :rates, Hash.new do
+      quote.stub :rates, {} do
         -> { converter.convert(quote) }.must_raise Quote::Invalid, 'Invalid to'
       end
     end

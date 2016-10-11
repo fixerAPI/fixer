@@ -27,7 +27,7 @@ class Quote
   private
 
   def base=(base)
-    @base = base ? base.upcase : DEFAULT_BASE
+    @base = base&.upcase || DEFAULT_BASE
   end
 
   def date=(date)
@@ -35,11 +35,8 @@ class Quote
     raise Invalid, 'Date too old' unless current_date
     @date = current_date
   rescue Sequel::DatabaseError => ex
-    if ex.wrapped_exception.is_a?(PG::DataException)
-      raise Invalid, 'Invalid date'
-    else
-      raise
-    end
+    raise Invalid, 'Invalid date' if ex.wrapped_exception.is_a?(PG::DataException)
+    raise
   end
 
   def find_rates
