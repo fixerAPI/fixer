@@ -5,12 +5,14 @@ require 'currency'
 class Quote
   Invalid = Class.new(StandardError)
 
+  DEFAULT_AMOUNT = 1
   DEFAULT_BASE = 'EUR'
 
-  attr_reader :base, :date
+  attr_reader :amount, :base, :date
 
   def initialize(params = {})
-    self.base = params[:base]
+    self.amount = params['amount']
+    self.base = params.values_at(:base, :from).compact.first
     self.date = params[:date]
   end
 
@@ -26,14 +28,18 @@ class Quote
 
   private
 
-  def base=(base)
-    @base = base&.upcase || DEFAULT_BASE
+  def amount=(value)
+    @amount = (value || DEFAULT_AMOUNT).to_f
+    raise Invalid, 'Invalid amount' if @amount.zero?
   end
 
-  def date=(date)
-    current_date = date ? Currency.current_date_before(date) : Currency.current_date
-    raise Invalid, 'Date too old' unless current_date
-    @date = current_date
+  def base=(value)
+    @base = value&.upcase || DEFAULT_BASE
+  end
+
+  def date=(value)
+    @date = value ? Currency.current_date_before(value) : Currency.current_date
+    raise Invalid, 'Date too old' unless @date
   rescue Sequel::DatabaseError => ex
     raise Invalid, 'Invalid date' if ex.wrapped_exception.is_a?(PG::DataException)
     raise
@@ -49,16 +55,16 @@ class Quote
 
   def find_default_rates
     Currency.where(date: date).reduce({}) do |rates, currency|
-      rates.update(currency.to_h)
+      rates.update(Hash[currency.to_h.map { |k, v| [k, round_rate(v * amount)] }])
     end
   end
 
   def find_rebased_rates
     rates = find_default_rates
-    denominator = rates.update(DEFAULT_BASE => 1.0).delete(base)
+    denominator = rates.update(DEFAULT_BASE => amount).delete(base)
     raise Invalid, 'Invalid base' unless denominator
     rates.each do |iso_code, rate|
-      rates[iso_code] = round_rate(rate / denominator)
+      rates[iso_code] = round_rate(amount * rate / denominator)
     end
 
     rates

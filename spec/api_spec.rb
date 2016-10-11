@@ -26,8 +26,23 @@ describe 'the API' do
     json['base'].must_equal 'USD'
   end
 
+  it 'sets base amount' do
+    get '/latest?amount=10'
+    json['rates']['USD'].must_be :>, 10
+  end
+
   it 'filters symbols' do
     get '/latest?symbols=USD'
+    json['rates'].keys.must_equal %w(USD)
+  end
+
+  it 'aliases base as from' do
+    get '/latest?from=USD'
+    json['base'].must_equal 'USD'
+  end
+
+  it 'aliases symbols as to' do
+    get '/latest?to=USD'
     json['rates'].keys.must_equal %w(USD)
   end
 
@@ -67,8 +82,8 @@ describe 'the API' do
     end
   end
 
-  it 'returns converted amount' do
-    get '/converter?to=USD&amount=100'
-    json['amount'].wont_be :nil?
+  it 'converts an amount' do
+    get '/latest?from=GBP&to=USD&amount=100'
+    json['rates']['USD'].must_be :>, 100
   end
 end

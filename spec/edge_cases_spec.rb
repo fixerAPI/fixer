@@ -34,6 +34,12 @@ describe 'the API' do
     json.wont_be_empty
   end
 
+  it 'will not process an invalid amount' do
+    get '/latest?amount=foo'
+    last_response.must_be :unprocessable?
+    json.wont_be_empty
+  end
+
   it 'handles malformed queries' do
     get '/latest?base=USD?callback=?'
     last_response.must_be :unprocessable?

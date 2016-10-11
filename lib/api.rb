@@ -4,7 +4,6 @@ require 'oj'
 require 'sinatra'
 require 'rack/cors'
 require 'quote'
-require 'converter'
 
 configure :development do
   set :show_exceptions, :after_handler
@@ -32,12 +31,8 @@ helpers do
     end
   end
 
-  def converter
-    @converter ||= Converter.new(params)
-  end
-
   def symbols
-    @symbols ||= params.values_at('symbols', 'currencies').first
+    @symbols ||= params.values_at('symbols', 'to').compact.first
   end
 
   def jsonp(data)
@@ -81,11 +76,6 @@ end
 get(/(?<date>\d{4}-\d{2}-\d{2})/) do
   last_modified quote_attributes[:date]
   jsonp quote_attributes
-end
-
-get '/converter' do
-  params[:base] = params[:from]
-  jsonp Hash(amount: converter.convert(quote))
 end
 
 not_found do
