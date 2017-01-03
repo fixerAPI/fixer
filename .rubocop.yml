@@ -2,5 +2,7 @@ AllCops:
   TargetRubyVersion: 2.3
 Documentation:
   Enabled: false
+Metrics/BlockLength:
+  Enabled: false
 Metrics/LineLength:
   Enabled: false
