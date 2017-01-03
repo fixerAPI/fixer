@@ -2,6 +2,8 @@ version: '2'
 services:
   db:
     image: postgres
+  memcache:
+    image: memcached
   web:
     build: .
     volumes:
@@ -9,7 +11,9 @@ services:
     ports:
       - 8080:8080
     environment:
-      - RACK_ENV=production
-      - DATABASE_URL=postgres://postgres@db/postgres
-    depends_on:
+      RACK_ENV: production
+      DATABASE_URL: postgres://postgres@db/postgres
+      MEMCACHE_SERVERS: memcache
+    links:
       - db
+      - memcache

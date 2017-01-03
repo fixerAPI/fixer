@@ -4,6 +4,7 @@ GEM
     ansi (1.5.0)
     ast (2.3.0)
     coderay (1.1.1)
+    dalli (2.7.6)
     fixer (0.6.0)
       oga (~> 2.0)
     kgio (2.10.0)
@@ -64,7 +65,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dalli
   fixer
+  kgio
   minitest
   minitest-around
   newrelic_rpm

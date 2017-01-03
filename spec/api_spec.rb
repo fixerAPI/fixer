@@ -11,6 +11,10 @@ describe 'the API' do
   let(:json) { Oj.load(last_response.body) }
   let(:headers) { last_response.headers }
 
+  before do
+    App.cache.flush
+  end
+
   it 'describes itself' do
     get '/'
     last_response.must_be :ok?
@@ -85,5 +89,11 @@ describe 'the API' do
   it 'converts an amount' do
     get '/latest?from=GBP&to=USD&amount=100'
     json['rates']['USD'].must_be :>, 100
+  end
+
+  it 'caches quotes' do
+    App.cache.set '/latest', 'foo'
+    get '/latest'
+    last_response.body.must_equal 'foo'
   end
 end
