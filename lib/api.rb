@@ -13,6 +13,7 @@ end
 
 configure :production do
   require 'newrelic_rpm'
+  disable :dump_errors
 end
 
 helpers do
