@@ -96,4 +96,11 @@ describe 'the API' do
     get '/latest'
     last_response.body.must_equal 'foo'
   end
+
+  it 'sets Content-Type header to JSON when caching' do
+    2.times do
+      get '/latest'
+      last_response.headers['Content-Type'].must_equal 'application/json'
+    end
+  end
 end

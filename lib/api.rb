@@ -65,6 +65,10 @@ options '*' do
   200
 end
 
+before do
+  content_type 'application/json'
+end
+
 get '/' do
   last_modified App.released_at
   jsonp details: 'http://fixer.io', version: App.version
