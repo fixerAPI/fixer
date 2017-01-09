@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 require_relative 'helper'
 require 'rack/test'
 require 'api'
@@ -12,7 +11,7 @@ describe 'the API' do
   let(:headers) { last_response.headers }
 
   before do
-    App.cache.flush
+    Dalli::Client.new.flush
   end
 
   it 'describes itself' do
@@ -61,11 +60,23 @@ describe 'the API' do
     json['rates'].wont_be :empty?
   end
 
-  it 'returns a last modified header' do
+  it 'returns a cache control header' do
     %w(/ /latest /2012-11-20).each do |path|
+      get path
+      headers['Cache-Control'].wont_be_nil
+    end
+  end
+
+  it 'returns a last modified header' do
+    %w(/latest /2012-11-20).each do |path|
       get path
       headers['Last-Modified'].wont_be_nil
     end
+  end
+
+  it 'returns an etag header' do
+    get '/'
+    headers['ETag'].wont_be_nil
   end
 
   it 'allows cross-origin requests' do
@@ -89,12 +100,6 @@ describe 'the API' do
   it 'converts an amount' do
     get '/latest?from=GBP&to=USD&amount=100'
     json['rates']['USD'].must_be :>, 100
-  end
-
-  it 'caches quotes' do
-    App.cache.set '/latest', 'foo'
-    get '/latest'
-    last_response.body.must_equal 'foo'
   end
 
   it 'sets Content-Type header to JSON when caching' do

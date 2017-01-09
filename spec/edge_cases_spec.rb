@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 require_relative 'helper'
 require 'rack/test'
 require 'api'
@@ -11,7 +10,7 @@ describe 'the API' do
   let(:json) { Oj.load(last_response.body) }
 
   before do
-    App.cache.flush
+    Dalli::Client.new.flush
   end
 
   it 'handles unfound pages' do

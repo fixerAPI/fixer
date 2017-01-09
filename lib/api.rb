@@ -1,11 +1,22 @@
 # frozen_string_literal: true
-
+require 'dalli'
 require 'oj'
 require 'sinatra'
+require 'rack/cache'
 require 'rack/cors'
 require 'quote'
 
-set :cache_ttl, 900 # 15 minutes
+use Rack::Cache,
+    verbose: true,
+    metastore: "memcached://#{ENV['MEMCACHE_SERVERS']}/meta",
+    entitystore: "memcached://#{ENV['MEMCACHE_SERVERS']}/body"
+
+use Rack::Cors do
+  allow do
+    origins '*'
+    resource '*', headers: :any, methods: :get
+  end
+end
 
 configure :development do
   set :show_exceptions, :after_handler
@@ -46,46 +57,30 @@ helpers do
   def encode_json(data)
     Oj.dump(data, mode: :compat)
   end
-
-  def cache
-    App.cache.fetch request.fullpath, settings.cache_ttl do
-      yield
-    end
-  end
-end
-
-use Rack::Cors do
-  allow do
-    origins '*'
-    resource '*', headers: :any, methods: :get
-  end
 end
 
 options '*' do
   200
 end
 
-before do
-  content_type 'application/json'
+get '*' do
+  cache_control :public, :must_revalidate, max_age: 900
+  pass
 end
 
 get '/' do
-  last_modified App.released_at
+  etag App.version
   jsonp details: 'http://fixer.io', version: App.version
 end
 
 get '/latest' do
-  cache do
-    last_modified quote_attributes[:date]
-    jsonp quote_attributes
-  end
+  last_modified quote.date
+  jsonp quote_attributes
 end
 
 get(/(?<date>\d{4}-\d{2}-\d{2})/) do
-  cache do
-    last_modified quote_attributes[:date]
-    jsonp quote_attributes
-  end
+  last_modified quote.date
+  jsonp quote_attributes
 end
 
 not_found do
