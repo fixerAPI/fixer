@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 return unless ENV['RACK_ENV'] == 'test'
 
 require 'rake/testtask'

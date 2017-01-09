@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 namespace :rates do
   task setup: :environment do
     require 'currency'

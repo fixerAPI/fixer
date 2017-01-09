@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 class Currency < Sequel::Model
   dataset_module do
     def recent
