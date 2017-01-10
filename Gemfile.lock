@@ -3,7 +3,6 @@ GEM
   specs:
     ast (2.3.0)
     coderay (1.1.1)
-    dalli (2.7.6)
     fixer (0.7.0)
     kgio (2.11.0)
     method_source (0.8.2)
@@ -21,8 +20,6 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rack (1.6.5)
-    rack-cache (1.6.1)
-      rack (>= 0.4)
     rack-cors (0.4.0)
     rack-protection (1.5.3)
       rack
@@ -59,7 +56,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  dalli
   fixer
   kgio
   minitest
@@ -67,7 +63,6 @@ DEPENDENCIES
   newrelic_rpm
   oj
   pry
-  rack-cache
   rack-cors
   rack-test
   rake

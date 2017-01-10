@@ -9,10 +9,6 @@ describe 'the API' do
   let(:app)  { Sinatra::Application }
   let(:json) { Oj.load(last_response.body) }
 
-  before do
-    Dalli::Client.new.flush
-  end
-
   it 'handles unfound pages' do
     get '/foo'
     last_response.status.must_equal 404

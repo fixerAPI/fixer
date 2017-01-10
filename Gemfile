@@ -3,12 +3,10 @@ source 'http://rubygems.org'
 
 ruby '2.4.0'
 
-gem 'dalli'
 gem 'fixer'
 gem 'kgio'
 gem 'newrelic_rpm'
 gem 'oj'
-gem 'rack-cache'
 gem 'rack-cors'
 gem 'rake'
 gem 'sequel_pg'

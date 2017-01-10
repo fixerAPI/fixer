@@ -2,6 +2,4 @@ before_script:
   - psql -c 'create database fixer_test;' -U postgres
 rvm:
   - 2.4.0
-services:
-  - memcached
 sudo: false

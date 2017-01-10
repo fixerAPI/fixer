@@ -10,10 +10,6 @@ describe 'the API' do
   let(:json) { Oj.load(last_response.body) }
   let(:headers) { last_response.headers }
 
-  before do
-    Dalli::Client.new.flush
-  end
-
   it 'describes itself' do
     get '/'
     last_response.must_be :ok?
@@ -100,12 +96,5 @@ describe 'the API' do
   it 'converts an amount' do
     get '/latest?from=GBP&to=USD&amount=100'
     json['rates']['USD'].must_be :>, 100
-  end
-
-  it 'sets Content-Type header to JSON when caching' do
-    2.times do
-      get '/latest'
-      last_response.headers['Content-Type'].must_equal 'application/json'
-    end
   end
 end

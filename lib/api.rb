@@ -1,15 +1,8 @@
 # frozen_string_literal: true
-require 'dalli'
 require 'oj'
 require 'sinatra'
-require 'rack/cache'
 require 'rack/cors'
 require 'quote'
-
-use Rack::Cache,
-    verbose: true,
-    metastore: "memcached://#{ENV['MEMCACHE_SERVERS']}/meta",
-    entitystore: "memcached://#{ENV['MEMCACHE_SERVERS']}/body"
 
 use Rack::Cors do
   allow do
@@ -34,12 +27,9 @@ helpers do
 
   def quote_attributes
     @quote_attributes ||= quote.attributes.tap do |data|
+      symbols = params.values_at('symbols', 'to').compact.first
       data[:rates].keep_if { |k, _| symbols.include?(k) } if symbols
     end
-  end
-
-  def symbols
-    @symbols ||= params.values_at('symbols', 'to').compact.first
   end
 
   def jsonp(data)

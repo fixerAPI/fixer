@@ -2,8 +2,6 @@ version: '2'
 services:
   db:
     image: postgres
-  memcache:
-    image: memcached
   web:
     build: .
     volumes:
@@ -13,7 +11,5 @@ services:
     environment:
       RACK_ENV: production
       DATABASE_URL: postgres://postgres@db/postgres
-      MEMCACHE_SERVERS: memcache
     links:
       - db
-      - memcache
