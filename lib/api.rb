@@ -25,13 +25,6 @@ helpers do
     @quote ||= Quote.new(params)
   end
 
-  def quote_attributes
-    @quote_attributes ||= quote.attributes.tap do |data|
-      symbols = params.values_at('symbols', 'to').compact.first
-      data[:rates].keep_if { |k, _| symbols.include?(k) } if symbols
-    end
-  end
-
   def jsonp(data)
     json = encode_json(data)
     callback = params.delete('callback')
@@ -65,12 +58,12 @@ end
 
 get '/latest' do
   last_modified quote.date
-  jsonp quote_attributes
+  jsonp quote.to_h
 end
 
 get(/(?<date>\d{4}-\d{2}-\d{2})/) do
   last_modified quote.date
-  jsonp quote_attributes
+  jsonp quote.to_h
 end
 
 not_found do

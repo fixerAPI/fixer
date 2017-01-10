@@ -7,11 +7,12 @@ class Quote
   DEFAULT_AMOUNT = 1
   DEFAULT_BASE = 'EUR'
 
-  attr_reader :amount, :base, :date
+  attr_reader :amount, :base, :date, :symbols
 
   def initialize(params = {})
     self.amount = params['amount']
     self.base = params.values_at(:base, :from).compact.first
+    self.symbols = params.values_at(:symbols, :to).compact.first
     self.date = params[:date]
   end
 
@@ -26,6 +27,8 @@ class Quote
   alias to_h attributes
 
   private
+
+  attr_writer :symbols
 
   def amount=(value)
     @amount = (value || DEFAULT_AMOUNT).to_f
@@ -45,7 +48,8 @@ class Quote
   end
 
   def find_rates
-    quoted_against_default_base? ? find_default_rates : find_rebased_rates
+    rates = quoted_against_default_base? ? find_default_rates : find_rebased_rates
+    symbols ? rates.keep_if { |k, _| symbols.include?(k) } : rates
   end
 
   def quoted_against_default_base?

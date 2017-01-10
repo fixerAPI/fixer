@@ -82,4 +82,16 @@ describe Quote do
       proc { quote }.must_raise Quote::Invalid
     end
   end
+
+  describe 'when given custom symbols' do
+    let(:quote) { Quote.new(symbols: 'FOO,BAR') }
+
+    it 'quotes rates only for given symbols' do
+      stub_rates 'FOO' => 1, 'BAR' => 2, 'BAZ' => 3 do |quote|
+        quote.rates.keys.must_include 'FOO'
+        quote.rates.keys.must_include 'BAR'
+        quote.rates.keys.wont_include 'BAZ'
+      end
+    end
+  end
 end
