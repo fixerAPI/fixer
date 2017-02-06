@@ -75,3 +75,7 @@ Initialize the database and seed data.
 docker-compose run web rake db:migrate rates:load
 docker-compose restart web
 ```
+
+## FAQ
+### "The API returns data for a date other than the date I asked for!"
+If the value of the `date`-property doesn't match the date you requested via query parameters that is due to the European Central Bank only publishing exchange rates **for working days**. In such cases, the exchange rates of the last working day are returned. [#47](https://github.com/hakanensari/fixer-io/issues/47)
