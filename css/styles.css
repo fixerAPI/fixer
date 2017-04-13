@@ -92,4 +92,35 @@ footer {
   margin: 2em 0;
   text-align: center;
 }
+@media screen and (max-width: 767px) {
+  #carbonads {
+    display: none;
+  }
+}
+@media screen and (min-width: 768px) {
+  #carbonads {
+    background-color: #f0f0f0;
+    position: absolute;
+    right: 24px;
+    top: 36px;
+    width: 150px;
+  }
+  .carbon-img,
+  .carbon-poweredby,
+  .carbon-text {
+    display: block;
+    margin: 10px;
+  }
+  .carbon-text,
+  .carbon-poweredby {
+    line-height: 1.3;
+    text-decoration: none;
+  }
+  .carbon-text {
+    font-size: 13px;
+  }
+  .carbon-poweredby {
+    font-size: 11px;
+    color: #999;
+  }
 }
