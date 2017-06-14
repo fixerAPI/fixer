@@ -71,11 +71,6 @@ describe 'the API' do
     end
   end
 
-  it 'returns an etag header' do
-    get '/'
-    headers['ETag'].wont_be_nil
-  end
-
   it 'allows cross-origin requests' do
     %w[/ /latest /2012-11-20].each do |path|
       header 'Origin', '*'

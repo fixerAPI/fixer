@@ -53,8 +53,7 @@ get '*' do
 end
 
 get '/' do
-  etag App.version
-  jsonp details: 'http://fixer.io', version: App.version
+  jsonp details: 'http://fixer.io'
 end
 
 get '/latest' do
