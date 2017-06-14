@@ -61,7 +61,7 @@ get '/latest' do
   jsonp quote.to_h
 end
 
-get(/(?<date>\d{4}-\d{2}-\d{2})/) do
+get '/(?<date>\d{4}-\d{2}-\d{2})', mustermann_opts: { type: :regexp } do
   last_modified quote.date
   jsonp quote.to_h
 end
