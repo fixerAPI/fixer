@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 worker_process_count = (ENV['WORKER_PROCESSES'] || 4).to_i
 
 preload_app true

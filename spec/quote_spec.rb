@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'helper'
 require 'quote'
 
@@ -27,7 +28,7 @@ describe Quote do
 
     it 'casts to hash' do
       stub_rates do |quote|
-        %i(base date rates).each do |key|
+        %i[base date rates].each do |key|
           quote.to_h.keys.must_include key
         end
       end

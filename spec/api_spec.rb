@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'helper'
 require 'rack/test'
 require 'api'
@@ -32,7 +33,7 @@ describe 'the API' do
 
   it 'filters symbols' do
     get '/latest?symbols=USD'
-    json['rates'].keys.must_equal %w(USD)
+    json['rates'].keys.must_equal %w[USD]
   end
 
   it 'aliases base as from' do
@@ -42,7 +43,7 @@ describe 'the API' do
 
   it 'aliases symbols as to' do
     get '/latest?to=USD'
-    json['rates'].keys.must_equal %w(USD)
+    json['rates'].keys.must_equal %w[USD]
   end
 
   it 'returns historical quotes' do
@@ -57,14 +58,14 @@ describe 'the API' do
   end
 
   it 'returns a cache control header' do
-    %w(/ /latest /2012-11-20).each do |path|
+    %w[/ /latest /2012-11-20].each do |path|
       get path
       headers['Cache-Control'].wont_be_nil
     end
   end
 
   it 'returns a last modified header' do
-    %w(/latest /2012-11-20).each do |path|
+    %w[/latest /2012-11-20].each do |path|
       get path
       headers['Last-Modified'].wont_be_nil
     end
@@ -76,7 +77,7 @@ describe 'the API' do
   end
 
   it 'allows cross-origin requests' do
-    %w(/ /latest /2012-11-20).each do |path|
+    %w[/ /latest /2012-11-20].each do |path|
       header 'Origin', '*'
       get path
       assert headers.key?('Access-Control-Allow-Methods')
@@ -84,7 +85,7 @@ describe 'the API' do
   end
 
   it 'responds to preflight requests' do
-    %w(/ /latest /2012-11-20).each do |path|
+    %w[/ /latest /2012-11-20].each do |path|
       header 'Origin', '*'
       header 'Access-Control-Request-Method', 'GET'
       header 'Access-Control-Request-Headers', 'Content-Type'

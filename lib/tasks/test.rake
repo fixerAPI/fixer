@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 return unless ENV['RACK_ENV'] == 'test'
 
 require 'rake/testtask'
@@ -12,4 +13,4 @@ end
 
 RuboCop::RakeTask.new
 
-task default: %w(db:migrate rates:load test rubocop)
+task default: %w[db:migrate rates:load test rubocop]
