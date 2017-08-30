@@ -6,7 +6,7 @@
 
 Fixer.io is a free JSON API for current and historical foreign exchange rates published by the European Central Bank.
 
-The rates are updated daily around 3PM CET.
+The rates are updated daily around 4PM CET.
 
 ## Usage
 
