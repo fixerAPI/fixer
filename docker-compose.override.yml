@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    environment:
+      RACK_ENV: development
+      VIRTUAL_HOST: localhost
+  nginx-proxy:
+    ports:
+      - '8080:80'

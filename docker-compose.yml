@@ -1,15 +1,22 @@
-version: '2'
+version: '3'
 services:
   db:
     image: postgres
+    volumes:
+      - data:/var/lib/postgresql/data
   web:
     build: .
-    volumes:
-      - .:/app
-    ports:
-      - 8080:8080
+    command: unicorn -c ./config/unicorn.rb
     environment:
-      RACK_ENV: production
       DATABASE_URL: postgres://postgres@db/postgres
+    entrypoint: ./wait-for-it.sh db:5432 -s --
+    expose:
+      - '8080'
     links:
       - db
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+volumes:
+  data:
