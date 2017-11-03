@@ -1,0 +1,53 @@
+PATH
+  remote: .
+  specs:
+    fixer (0.7.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
+    ast (2.3.0)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
+    hashdiff (0.3.7)
+    minitest (5.10.3)
+    parallel (1.12.0)
+    parser (2.4.0.0)
+      ast (~> 2.2)
+    powerpack (0.1.1)
+    public_suffix (3.0.0)
+    rainbow (2.2.2)
+      rake
+    rake (10.5.0)
+    rubocop (0.51.0)
+      parallel (~> 1.10)
+      parser (>= 2.3.3.1, < 3.0)
+      powerpack (~> 0.1)
+      rainbow (>= 2.2.2, < 3.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (~> 1.0, >= 1.0.1)
+    ruby-progressbar (1.9.0)
+    safe_yaml (1.0.4)
+    unicode-display_width (1.3.0)
+    vcr (3.0.3)
+    webmock (2.3.2)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.0)
+  fixer!
+  minitest (~> 5.0)
+  rake (~> 10.0)
+  rubocop
+  vcr (~> 3.0)
+  webmock (~> 2.3)
+
+BUNDLED WITH
+   1.16.0

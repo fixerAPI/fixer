@@ -1,6 +1,2 @@
 .bundle
 .env
-bin
-log
-tmp
-vendor

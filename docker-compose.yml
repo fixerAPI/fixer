@@ -5,8 +5,9 @@ services:
     volumes:
       - data:/var/lib/postgresql/data
   web:
-    build: .
-    command: unicorn -c ./config/unicorn.rb
+    build:
+      context: ./app
+    command: unicorn -c config/unicorn.rb
     environment:
       DATABASE_URL: postgres://postgres@db/postgres
     entrypoint: ./wait-for-it.sh db:5432 -s --

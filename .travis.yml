@@ -1,8 +1,10 @@
 before_install:
   - gem update --system
   - gem install bundler
-before_script:
   - psql -c 'create database fixer_test;' -U postgres
+  - cd app
+env:
+  - RACK_ENV=test
 rvm:
-  - 2.4.1
+  - 2.4.2
 sudo: false
