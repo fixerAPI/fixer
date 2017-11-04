@@ -1,81 +1,75 @@
-# Fixer.io
+# Fixer
 
-<img src="http://fixer.io/img/money.png" alt="fixer" width=180 align="middle">
+[![Travis](https://travis-ci.org/hakanensari/fixer.svg)](https://travis-ci.org/hakanensari/fixer)
 
-[![Travis](https://travis-ci.org/hakanensari/fixer-io.svg)](https://travis-ci.org/hakanensari/fixer-io)
+Fixer is a free API for current and historical foreign exchange rates [published by the European Central Bank](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html).
 
-Fixer.io is a free JSON API for current and historical foreign exchange rates published by the European Central Bank.
+A public instance of the API lives at [https://api.fixer.io](https://api.fixer.io). Alternatively, you can run  privately with the provided Docker image.
 
-The rates are updated daily around 4PM CET.
+Rates are updated around 4PM CET every working day.
 
 ## Usage
 
-Get the latest foreign exchange reference rates in JSON format.
+Get the latest foreign exchange rates.
 
 ```http
 GET /latest
-Host: api.fixer.io
 ```
 
 Get historical rates for any day since 1999.
 
 ```http
 GET /2000-01-03
-Host: api.fixer.io
 ```
 
 Rates are quoted against the Euro by default. Quote against a different currency by setting the base parameter in your request.
 
 ```http
 GET /latest?base=USD
-Host: api.fixer.io
 ```
 
-Request specific exchange rates by setting the symbols or currencies parameter.
+Request specific exchange rates by setting the symbols parameter.
 
 ```http
 GET /latest?symbols=USD,GBP
-Host: api.fixer.io
 ```
 
-Make cross-domain JSONP requests.
-
-```http
-GET /latest?callback=?
-Host: api.fixer.io
-```
-
-An HTTPS endpoint is also available at [https://api.fixer.io](https://api.fixer.io).
-
-Use [money.js](http://openexchangerates.github.io/money.js/) in the browser.
+Use [money.js](https://openexchangerates.github.io/money.js/) in the browser.
 
 ```js
-var demo = function(data) {
-  fx.rates = data.rates
-  var rate = fx(1).from("GBP").to("USD")
+let demo = () => {
+  let rate = fx(1).from("GBP").to("USD")
   alert("£1 = $" + rate.toFixed(4))
 }
 
-$.getJSON("http://api.fixer.io/latest", demo)
+fetch('https://api.fixer.io/latest')
+  .then((resp) => resp.json())
+  .then((data) => fx.rates = data.rates)
+  .then(demo)
 ```
 
-## Docker
+## Installation
 
-You can run a local instance of the app using Docker.
-
-Bring the stack up.
+To run locally with Docker, type
 
 ```bash
 docker-compose up -d
 ```
 
-Initialize the database and seed data.
+Then seed data with
 
 ```bash
 docker-compose run web rake db:migrate rates:load
-docker-compose restart web
 ```
 
-## FAQ
-### "The API returns data for a date other than the date I asked for!"
-If the value of the `date`-property doesn't match the date you requested via query parameters that is due to the European Central Bank only publishing exchange rates **for working days**. In such cases, the exchange rates of the last working day are returned. [#47](https://github.com/hakanensari/fixer-io/issues/47)
+In development, access the API at
+
+```
+http://localhost:8080
+```
+
+In production, create a [`.env`](.env.example) file in the project root first and then run above Docker commands with the production configuration file. For instance
+
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+```
