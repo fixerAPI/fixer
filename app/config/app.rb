@@ -10,7 +10,7 @@ module App
     end
 
     def root
-      Pathname.pwd
+      Pathname.new(File.expand_path('..', __dir__))
     end
   end
 end

@@ -15,6 +15,14 @@ services:
       - '8080'
     links:
       - db
+  scheduler:
+    build:
+      context: ./app
+    command: bin/schedule
+    environment:
+      DATABASE_URL: postgres://postgres@db/postgres
+    links:
+      - db
   nginx-proxy:
     image: jwilder/nginx-proxy
     volumes:

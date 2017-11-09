@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
 namespace :rates do
-  task setup: :environment do
+  desc 'Load all rates'
+  task load: :environment do
     require 'currency'
     require 'fixer'
-  end
 
-  desc 'Load all rates'
-  task load: :setup do
     Currency.db.transaction do
       Currency.dataset.delete
       data = Fixer::Feed.new(:historical)
@@ -16,7 +14,10 @@ namespace :rates do
   end
 
   desc 'Update rates'
-  task update: :setup do
+  task update: :environment do
+    require 'currency'
+    require 'fixer'
+
     Fixer::Feed.new.each do |hsh|
       Currency.find_or_create(hsh)
     end
