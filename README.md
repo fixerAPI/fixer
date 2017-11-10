@@ -34,7 +34,7 @@ Request specific exchange rates by setting the symbols parameter.
 GET /latest?symbols=USD,GBP
 ```
 
-Use [money.js](https://openexchangerates.github.io/money.js/) in the browser.
+The primary use case is client side. For instance, with [money.js](https://openexchangerates.github.io/money.js/) in the browser
 
 ```js
 let demo = () => {
@@ -62,7 +62,7 @@ Then seed data with
 docker-compose run web rake db:migrate rates:load
 ```
 
-In development, access the API at
+Now you can access the API at
 
 ```
 http://localhost:8080
