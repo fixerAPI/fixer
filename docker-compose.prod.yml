@@ -8,6 +8,8 @@ services:
   scheduler:
     restart: always
   nginx-proxy:
+    environment:
+      HTTPS_METHOD: noredirect
     labels:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true"
     ports:
