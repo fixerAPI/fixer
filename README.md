@@ -68,8 +68,8 @@ Now you can access the API at
 http://localhost:8080
 ```
 
-In production, create a [`.env`](.env.example) file in the project root first and then run above Docker commands with the production configuration file. For instance
+In production, create a [`.env`](.env.example) file in the project root and run with
 
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
