@@ -4,12 +4,20 @@ services:
     restart: always
   web:
     env_file: .env
+    logging:
+      options:
+        max-size: "50m"
+        max-file: "10"
     restart: always
   scheduler:
     restart: always
   nginx-proxy:
     labels:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true"
+    logging:
+      options:
+        max-size: "50m"
+        max-file: "10"
     ports:
       - "80:80"
       - "443:443"
