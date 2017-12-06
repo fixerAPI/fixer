@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Fixer is a free, open-source foreign exchange rates and currency conversion API. It returns current and historical data and is updated daily.">
+    <meta name="description" content="Fixer provides a free, simple, and lightweight API for current and historical foreign exchange rates and currency conversion. The API tracks rates published daily by the European Central Bank.">
     <title>Foreign exchange rates and currency conversion API</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/styles.css">
@@ -21,12 +21,14 @@
           <li><a href="https://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html">Data sets</a></li>
         </ul>
       </header>
-      <p>
-        Fixer is a free API for current and historical foreign exchange rates published by the European Central Bank.
-      </p>
-      <p>
-        The rates are updated daily around 4PM CET every working day.
-      </p>
+      <div class="lead">
+        <p>
+          Fixer is an open-source, simple, and lightweight API for current and historical foreign exchange (forex) rates published by the European Central Bank.
+        </p>
+        <p>
+          The API updates rates daily around 4PM CET every working day. Historical rates go back to 1st January, 1999.
+        </p>
+      </div>
       <!--googleoff: all-->
       <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=fixerio" id="_carbonads_js"></script>
       <!--googleon: all-->
@@ -58,7 +60,7 @@
       <code class="request"><a>https://api.fixer.io/latest?symbols=USD,GBP</a></code>
       <!--googleon: all-->
       <p>
-        The primary use case is client side. For instance, you can use <a href="https://openexchangerates.github.io/money.js/" target="_blank">money.js</a> in the browser.
+        The primary use case is client side.
       </p>
       <!--googleoff: all-->
       <code class="js">let demo = () => {
