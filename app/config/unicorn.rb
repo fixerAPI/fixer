@@ -9,3 +9,8 @@ timeout 10
 before_fork do |_, _|
   Sequel::DATABASES.each(&:disconnect)
 end
+
+fork do
+  require_relative 'environment'
+  require 'schedule'
+end
