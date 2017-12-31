@@ -14,13 +14,13 @@ Gem::Specification.new do |spec|
   SUMMARY
   spec.homepage      = 'https://github.com/hakanensari/fixer'
   spec.license       = 'MIT'
-  spec.files         = Dir.glob('lib/**/*') + %w[LICENSE README.md]
+  spec.files         = Dir.glob('lib/**/*') + %w[README.md]
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler', '~> 1.0'
-  spec.add_development_dependency 'minitest', '~> 5.0'
-  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'minitest'
+  spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rubocop'
-  spec.add_development_dependency 'vcr', '~> 3.0'
-  spec.add_development_dependency 'webmock', '~> 2.3'
+  spec.add_development_dependency 'vcr'
+  spec.add_development_dependency 'webmock'
 end

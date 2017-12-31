@@ -8,14 +8,14 @@ module Fixer
   class Feed
     include Enumerable
 
-    TYPES = {
+    SCOPES = {
       current: 'daily',
       ninety_days: 'hist-90d',
       historical: 'hist'
     }.freeze
 
-    def initialize(type = :current)
-      @type = TYPES.fetch(type) { raise ArgumentError }
+    def initialize(scope = :current)
+      @scope = SCOPES.fetch(scope) { raise ArgumentError }
     end
 
     def each
@@ -42,7 +42,7 @@ module Fixer
     end
 
     def url
-      URI("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-#{@type}.xml")
+      URI("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-#{@scope}.xml")
     end
   end
 end
