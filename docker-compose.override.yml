@@ -1,6 +1,8 @@
 version: '3'
 services:
   web:
+    build:
+      context: ./app
     environment:
       RACK_ENV: development
       VIRTUAL_HOST: localhost

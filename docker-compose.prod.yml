@@ -1,16 +1,15 @@
 version: '3'
 services:
   db:
-    restart: always
+    restart: unless-stopped
   web:
     env_file: .env
+    image: hakanensari/fixer
     logging:
       options:
         max-size: "50m"
         max-file: "10"
-    restart: always
-  scheduler:
-    restart: always
+    restart: unless-stopped
   nginx-proxy:
     labels:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true"
@@ -21,7 +20,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    restart: always
+    restart: unless-stopped
     volumes:
       - /etc/nginx/conf.d
       - ./limit_req.conf:/etc/nginx/conf.d/limit_req.conf:ro
@@ -32,7 +31,7 @@ services:
     image: jrcs/letsencrypt-nginx-proxy-companion
     depends_on:
       - nginx-proxy
-    restart: always
+    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - certs:/etc/nginx/certs:rw

@@ -1,25 +1,15 @@
 # frozen_string_literal: true
 
 namespace :rates do
-  desc 'Load all rates'
-  task load: :environment do
-    require 'currency'
-    require 'fixer'
-
-    Currency.db.transaction do
-      Currency.dataset.delete
-      data = Fixer::Feed.new(:historical)
-      Currency.multi_insert(data.to_a)
-    end
+  desc 'Reload all rates'
+  task reload: :environment do
+    require 'bank'
+    Bank.fetch_all_rates!
   end
 
-  desc 'Update rates'
+  desc 'Update current rates'
   task update: :environment do
-    require 'currency'
-    require 'fixer'
-
-    Fixer::Feed.new.each do |hsh|
-      Currency.find_or_create(hsh)
-    end
+    require 'bank'
+    Bank.fetch_current_rates!
   end
 end

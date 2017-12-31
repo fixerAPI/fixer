@@ -6,5 +6,5 @@ before_install:
 env:
   - RACK_ENV=test
 rvm:
-  - 2.4.2
+  - 2.5.0
 sudo: false
