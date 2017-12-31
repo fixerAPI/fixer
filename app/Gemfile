@@ -5,7 +5,6 @@ source 'http://rubygems.org'
 ruby '2.5.0'
 
 gem 'fixer'
-gem 'kgio'
 gem 'oj'
 gem 'rack-cors'
 gem 'rake'

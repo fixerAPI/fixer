@@ -60,7 +60,6 @@ PLATFORMS
 
 DEPENDENCIES
   fixer
-  kgio
   minitest
   minitest-around
   oj
