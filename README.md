@@ -4,7 +4,7 @@
 
 Fixer is a free API for current and historical foreign exchange rates [published by the European Central Bank](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html).
 
-A public instance of the API lives at [https://api.fixer.io](https://api.fixer.io). Alternatively, you can run  privately with the provided Docker image.
+A public instance of the API lives at [https://api.fixer.io](https://api.fixer.io). Alternatively, you can run  privately with the provided [Docker image](https://hub.docker.com/r/hakanensari/fixer/).
 
 Rates are updated around 4PM CET every working day.
 
@@ -50,7 +50,9 @@ fetch('https://api.fixer.io/latest')
 
 ## Installation
 
-To run locally with Docker, type
+I have included a sample Docker Compose configuration in the repo.
+
+To build locally, type
 
 ```bash
 docker-compose up -d
