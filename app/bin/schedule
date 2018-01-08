@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+system 'rake db:setup'
+
+require 'rufus-scheduler'
+
+scheduler = Rufus::Scheduler.new
+scheduler.cron '*/15 15,16,17 * * 1-5', timeout: '1m' do
+  system 'rake rates:update'
+end
+scheduler.join

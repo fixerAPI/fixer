@@ -56,12 +56,6 @@ To run locally with Docker, type
 docker-compose up -d
 ```
 
-Then seed data with
-
-```bash
-docker-compose run web rake db:migrate rates:reload
-```
-
 Now you can access the API at
 
 ```

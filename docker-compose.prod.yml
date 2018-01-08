@@ -10,7 +10,16 @@ services:
         max-size: "50m"
         max-file: "10"
     restart: unless-stopped
+  scheduler:
+    env_file: .env
+    image: hakanensari/fixer
+    logging:
+      options:
+        max-size: "50m"
+        max-file: "10"
+    restart: unless-stopped
   nginx-proxy:
+    image: jwilder/nginx-proxy
     labels:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true"
     logging:
@@ -23,6 +32,7 @@ services:
     restart: unless-stopped
     volumes:
       - /etc/nginx/conf.d
+      - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./limit_req.conf:/etc/nginx/conf.d/limit_req.conf:ro
       - certs:/etc/nginx/certs:ro
       - html:/usr/share/nginx/html

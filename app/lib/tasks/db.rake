@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
 namespace :db do
-  desc 'Create db'
-  task :create do
-    `createdb fixer`
-  end
-
   desc 'Run database migrations'
   task migrate: :environment do
     Sequel.extension(:migration)
@@ -16,4 +11,6 @@ namespace :db do
 
     Sequel::IntegerMigrator.new(db, dir, opts).run
   end
+
+  task setup: %w[db:migrate rates:reload]
 end

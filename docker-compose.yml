@@ -6,16 +6,19 @@ services:
       - data:/var/lib/postgresql/data
   web:
     command: unicorn -c config/unicorn.rb
+    entrypoint: bin/wait-for-it.sh db:5432 -s --
     environment:
       DATABASE_URL: postgres://postgres@db/postgres
-    entrypoint: ./wait-for-it.sh db:5432 -s --
     expose:
       - '8080'
     links:
       - db
-  nginx-proxy:
-    image: jwilder/nginx-proxy
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
+  scheduler:
+    command: bin/schedule
+    entrypoint: bin/wait-for-it.sh db:5432 -s --
+    environment:
+      DATABASE_URL: postgres://postgres@db/postgres
+    links:
+      - db
 volumes:
   data:

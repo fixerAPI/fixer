@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-return if ENV['RACK_ENV'] == 'production'
+return unless defined?(Rubocop)
 
 require 'rake/testtask'
 require 'rubocop/rake_task'
@@ -13,4 +13,4 @@ end
 
 RuboCop::RakeTask.new
 
-task default: %w[db:migrate rates:reload test rubocop]
+task default: %w[db:setup test rubocop]

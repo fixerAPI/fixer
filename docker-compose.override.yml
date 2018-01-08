@@ -6,6 +6,10 @@ services:
     environment:
       RACK_ENV: development
       VIRTUAL_HOST: localhost
-  nginx-proxy:
     ports:
-      - '8080:80'
+      - "8080:8080"
+  scheduler:
+    build:
+      context: ./app
+    environment:
+      RACK_ENV: development
