@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-return unless defined?(Rubocop)
-
 require 'rake/testtask'
-require 'rubocop/rake_task'
+begin
+  require 'rubocop/rake_task'
+rescue LoadError
+  return
+end
 
 Rake::TestTask.new(test: :environment) do |t|
   t.libs.push('lib')
