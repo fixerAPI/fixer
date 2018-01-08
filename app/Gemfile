@@ -18,5 +18,4 @@ group :development do
   gem 'minitest-around'
   gem 'rack-test'
   gem 'rubocop'
-  gem 'shotgun'
 end
