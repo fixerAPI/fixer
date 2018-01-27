@@ -56,6 +56,12 @@ describe Quote do
         rate.must_equal 1.4296
       end
     end
+
+    it 'returns the currencies sorted' do
+      stub_rates 'BAZ' => 1.5, 'FOO' => 2, 'BAR' => 3, 'QUX' => 4 do |quote|
+        quote.rates.keys.must_equal quote.rates.keys.sort
+      end
+    end
   end
 
   describe 'when given an invalid base' do

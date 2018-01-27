@@ -58,7 +58,7 @@ class Quote
   end
 
   def find_default_rates
-    Currency.where(date: date).reduce({}) do |rates, currency|
+    Currency.where(date: date).order(:iso_code).reduce({}) do |rates, currency|
       rates.update(Hash[currency.to_h.map { |k, v| [k, round_rate(v * amount)] }])
     end
   end
@@ -67,11 +67,10 @@ class Quote
     rates = find_default_rates
     denominator = rates.update(DEFAULT_BASE => amount).delete(base)
     raise Invalid, 'Invalid base' unless denominator
-    rates.each do |iso_code, rate|
-      rates[iso_code] = round_rate(amount * rate / denominator)
-    end
-
     rates
+      .map { |(iso_code, rate)| [iso_code, round_rate(amount * rate / denominator)] }
+      .sort_by(&:first)
+      .to_h
   end
 
   # I'm mimicking the apparent convention of the ECB here.
