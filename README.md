@@ -1,5 +1,10 @@
 # Fixer
 
+```diff
+## Legacy Users
++ this will be highlighted in green
+```
+
 [![Travis](https://travis-ci.org/hakanensari/fixer.svg)](https://travis-ci.org/hakanensari/fixer)
 
 Fixer is a free API for current and historical foreign exchange rates [published by the European Central Bank](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html).
