@@ -45,6 +45,8 @@ It’s very important for us to ensure a smooth transition to the new API Endpoi
 
 
 
+
+
 [![Travis](https://travis-ci.org/hakanensari/fixer.svg)](https://travis-ci.org/hakanensari/fixer)
 
 Fixer is a free API for current and historical foreign exchange rates [published by the European Central Bank](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html).
