@@ -4,27 +4,27 @@ We are happy to announce the complete relaunch of fixer.io into a more stable, m
 
 **Required Changes to Legacy Integrations (api.fixer.io)**
 
-As of March 6th 2018, the legacy fixer API (api.fixer.io) is deprecated and a completely re-engineered API is now accessible at https://data.fixer.io/api/ The core structure of the old API has remained unchanged, and you will only need to perform a few simple changes to your integration.
+As of March 6th 2018, the legacy Fixer API (api.fixer.io) is deprecated and a completely re-engineered API is now accessible at https://data.fixer.io/api/ The core structure of the old API has remained unchanged, and you will only need to perform a few simple changes to your integration.
 
-1. Get a Free fixer Access Token
+1. Get a Free Fixer Access Token
 Go to fixer.io and create an account. After signup, you will receive an access token immediately. If you plan on using less than 1000 requests per month, your account will be completely free. If you need more or want to use some of our new features, you’ll need to choose one of the paid options.
 
 2. Replace API URL and add Access Key
-The new API is a complete drop-in replacement to the old API, but it has changed to a new endpoint and now requires an access key in the GET URL. Please change your API URL from api.fixer.io to https://data.fixer.io/api and attach your newly generated access key to the URL as a GET parameter named „access_key“. 
+The new API comes with a new endpoint and now requires an access key in the GET URL. Please change your API URL from api.fixer.io to https://data.fixer.io/api and attach your newly generated access key to the URL as a GET parameter named „access_key“. 
 
 **Example**
 
-If your old API Call was https://api.fixer.io/latest?base=USD then your new integration should point to: https://data.fixer.io/api/latest?base=USD&access_key=YOUR_ACCESS_KEY 
+If your old API Call was https://api.fixer.io/latest then your new integration should point to: https://data.fixer.io/api/latest?access_key=YOUR_ACCESS_KEY 
 
 **New Features**
 
 Although the core structure of the fixer API remains unchanged, we added a whole lot of improvements, 100+ more currencies, and many more features to the new Fixer API. You can read more about all new features on the new fixer.io website. Here’s a list of the most important ones:
 
 - **Fixer is still free!**
-Although we now offer a set of premium plans for more advanced users, all the features that you are used to from the legacy API are still completely free of charge. The only limitation is our new 1000 requests/month limit for customers using a free account. If you need more than 1000 requests per month, you’ll need to choose one of the paid plans starting at $10 per month.
+Although we now offer a set of premium plans for more advanced users, the basic API features (e.g. getting the latest and historical exchange rates) remain completely free of charge. Minor limitations include our new 1000 requests/month limit and EUR being the only available base currency for customers using a free account. If you need more than 1000 requests per month or want to use all 170 available base currencies, you’ll need to choose one of the paid plans starting at only $10 per month.
 
 - **Over 100 Additional Currencies**
-The new Fixer API now supports over 100 additional currencies, bumping the total available currencies for conversion to 168.
+The new Fixer API now supports over 100 additional currencies, bumping the total available currencies for conversion to 170.
 
 - **More Reliable Data Sources & Updates every minute**
 The old Fixer API was limited to currency data from the European Central Bank, which updates only once every day. The new API comes with 16+ connected data sources and data updates every hour, 10-minutes, or even every minute - depending on which subscription plan you choose.
@@ -39,11 +39,6 @@ We have no immediate timeline for switching off the old Fixer API. However, we w
 
 - Need help? Please get in touch
 It’s very important for us to ensure a smooth transition to the new API Endpoint for all of our users. If you are a developer who has published a third-party plugin with Fixer, we recommend you to get in touch and share this announcement with your user base. If you need any help or have questions about the transition, please reach out at support@fixer.io 
-
-
-
-
-
 
 
 
