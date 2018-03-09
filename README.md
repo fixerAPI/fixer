@@ -41,7 +41,7 @@ We have no immediate timeline for switching off the old Fixer API. However, we w
 It’s very important for us to ensure a smooth transition to the new API Endpoint for all of our users. If you are a developer who has published a third-party plugin with Fixer, we recommend you to get in touch and share this announcement with your user base. If you need any help or have questions about the transition, please reach out at support@fixer.io 
 
 - Legacy Plan
-For a limited period of time we are also offering a Free Legacy Plan for all legacy users. This plan comes with free SSL support and the ability to change base currency. Sign up for the Legacy Plan [here](https://fixer.io/signup/legacy): 
+For a limited period of time we are also offering a Free Legacy Plan for all legacy users. This plan comes with free SSL support and the ability to change base currency. You can sign up for the Legacy Plan [here](https://fixer.io/signup/legacy). 
 
 
 
