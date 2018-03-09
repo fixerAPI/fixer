@@ -6,10 +6,10 @@ We are happy to announce the complete relaunch of fixer.io into a more stable, m
 
 As of March 6th 2018, the legacy Fixer API (api.fixer.io) is deprecated and a completely re-engineered API is now accessible at https://data.fixer.io/api/ The core structure of the old API has remained unchanged, and you will only need to perform a few simple changes to your integration.
 
-1. Get a Free Fixer Access Token
+**1. Get a Free Fixer Access Token**
 Go to fixer.io and create an account. After signup, you will receive an access token immediately. If you plan on using less than 1000 requests per month, your account will be completely free. If you need more or want to use some of our new features, you’ll need to choose one of the paid options.
 
-2. Replace API URL and add Access Key
+**2. Replace API URL and add Access Key**
 The new API comes with a new endpoint and now requires an access key in the GET URL. Please change your API URL from api.fixer.io to https://data.fixer.io/api and attach your newly generated access key to the URL as a GET parameter named „access_key“. 
 
 **Example**
