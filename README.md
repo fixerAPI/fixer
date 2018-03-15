@@ -1,5 +1,7 @@
 # Fixer -  Important Announcement
 
+[**The old, deprecated Fixer API will be discontinued on June 1st, 2018**]
+
 We are happy to announce the complete relaunch of fixer.io into a more stable, more secure, and much more advanced currency & exchange rate conversion API platform. While the core structure of our API remains unchanged, all users of the legacy Fixer API will be required to sign up for a free API access key and perform a few simple changes to their integration. To learn more about the changes that are required, please jump to the „Required Changes“ section below.
 
 **Required Changes to Legacy Integrations (api.fixer.io)**
@@ -38,7 +40,7 @@ The new fixer API has over 3 new endpoints, including a Direct Conversion endpoi
 
 **- Discontinuation of the old API**
 
-We have no immediate timeline for switching off the old Fixer API. However, we will not provide support for it or develop it further at this stage. We will monitor the request volume on the legacy API and will make a decision on turning it off once request levels have dropped off. We will follow up with a clear timeline here on GitHub.
+The old, deprecated Fixer API will be discontinued on **June 1st, 2018**. Please make sure to adjust your existing implementation to point to the new API endpoint (see above) as soon as possible in order to prevent service disruption on the planned shutdown date. In case you have any questions, please feel free to contact us using the email address below. 
 
 **- Need help? Please get in touch**
 
