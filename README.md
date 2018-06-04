@@ -1,6 +1,6 @@
-# Fixer -  Important Announcement
+![alt text](https://github.com/fixerAPI/fixer/blob/master/warning.png?raw=true)
 
-[**The old, deprecated Fixer API will be discontinued on June 1st, 2018**]
+# Fixer -  Important Announcement
 
 We are happy to announce the complete relaunch of fixer.io into a more stable, more secure, and much more advanced currency & exchange rate conversion API platform. While the core structure of our API remains unchanged, all users of the legacy Fixer API will be required to sign up for a free API access key and perform a few simple changes to their integration. To learn more about the changes that are required, please jump to the „Required Changes“ section below.
 
