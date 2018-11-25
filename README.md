@@ -118,5 +118,5 @@ In production, create a [`.env`](.env.example) file in the project root and run 
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
-# Other Languages
+## Other Languages
 - DotNet Fixer.IO (https://github.com/davidrevoledo/fixerdotnet)
