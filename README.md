@@ -34,7 +34,7 @@ The new Fixer API now supports over 100 additional currencies, bumping the total
 The old Fixer API was limited to currency data from the European Central Bank, which updates only once every day. The new API comes with 16+ connected data sources and data updates every hour, 10-minutes, or even every minute - depending on which subscription plan you choose.
 
 - **More Endpoints**
-The new fixer API has over 3 new endpoints, including a Direct Conversion endpoint, Time-Series conversion endpoint, and allows you to see the fluctuation of a specfic currency using our new Fluctuation endpoint. To learn more about all the new features, please head over to the API documentation at fixer.io/documentation 
+The new fixer API has over 3 new endpoints, including a Direct Conversion endpoint, Time-Series conversion endpoint, and allows you to see the fluctuation of a specific currency using our new Fluctuation endpoint. To learn more about all the new features, please head over to the API documentation at fixer.io/documentation 
 
 **Next Steps**
 
