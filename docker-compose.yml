@@ -4,6 +4,8 @@ services:
     image: postgres
     volumes:
       - data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
   web:
     command: unicorn -c config/unicorn.rb
     entrypoint: bin/wait-for-it.sh db:5432 -s --
